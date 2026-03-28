@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-[#0a0a0f]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumikarsa Bidakara | The Soul of the Archipelago</title>
+    <meta name="description" content="Immerse yourself in ultra-luxury Indonesian hospitality. Discover Bidakara's signature suites, cinematic venues, and unforgettable experiences.">
+    
+    <!-- Google Fonts: Playfair Display (Serif) & Neue Haas Grotesk alternative (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        charcoal: {
+                            DEFAULT: '#0F1115',
+                            dark: '#0a0a0f',
+                            light: '#1a1c23',
+                        },
+                        gold: {
+                            light: '#E8C547',
+                            DEFAULT: '#D4AF77',
+                            dark: '#A6824D',
+                        },
+                        ivory: {
+                            DEFAULT: '#F5F0E8',
+                            dark: '#EADDC7',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #D4AF77 0%, #E8C547 50%, #D4AF77 100%)',
+                        'dark-gold-bg': 'linear-gradient(to bottom, #0a0a0f 0%, #1a1c23 100%)',
+                        'footer-gradient': 'linear-gradient(to bottom, #0a0a0f 0%, #1a1c23 50%, #2a2418 100%)',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(212, 175, 119, 0.3)',
+                        'glow-strong': '0 0 30px rgba(232, 197, 71, 0.5)',
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.5)',
+                    },
+                    transitionTimingFunction: {
+                        'cinematic': 'cubic-bezier(0.4, 0, 0.2, 1)',
+                    },
+                    transitionDuration: {
+                        '400': '400ms',
+                        '800': '800ms',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0a0a0f; 
+            color: #F5F0E8; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .serif { 
+            font-family: '"Playfair Display"', Georgia, serif; 
+        }
+        
+        /* Subtle Grain Texture Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* 1. Preloader (CSS Only Animation) */
+        .loading-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4AF77, #E8C547, #D4AF77);
+            background-size: 200% auto;
+            z-index: 10000;
+            animation: loadProgress 2s ease-in-out forwards, gradientShift 2s linear infinite;
+        }
+        @keyframes loadProgress {
+            0% { width: 0%; opacity: 1; }
+            80% { width: 100%; opacity: 1; }
+            100% { width: 100%; opacity: 0; }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* Glassmorphism Classes */
+        .glass-nav {
+            background: rgba(10, 10, 15, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 119, 0.1);
+        }
+        .glass-card {
+            background: rgba(26, 28, 35, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Magnetic Pill Button */
+        .btn-magnetic {
+            background: rgba(212, 175, 119, 0.1);
+            border: 1px solid rgba(212, 175, 119, 0.4);
+            color: #E8C547;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border-radius: 9999px;
+            backdrop-filter: blur(4px);
+        }
+        .btn-magnetic::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(135deg, #D4AF77 0%, #E8C547 100%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .btn-magnetic:hover {
+            color: #0a0a0f;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(232, 197, 71, 0.4);
+            border-color: transparent;
+        }
+        .btn-magnetic:hover::after { opacity: 1; }
+
+        /* Hover Reveal Effects */
+        .reveal-border {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-border::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid #D4AF77;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            z-index: 10;
+        }
+        .reveal-border:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+        }
+        .reveal-border:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .reveal-border:hover img {
+            filter: brightness(1.1) contrast(1.1);
+            transform: scale(1.05);
+        }
+        .reveal-border img {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .text-slide-up {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+        }
+        .reveal-border:hover .text-slide-up {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Hero Image Overlay Gradient */
+        .hero-vignette {
+            background: radial-gradient(circle at center, transparent 0%, rgba(10, 10, 15, 0.8) 100%),
+                        linear-gradient(to bottom, rgba(10, 10, 15, 0.5) 0%, transparent 40%, rgba(10, 10, 15, 0.9) 100%);
+        }
+
+        /* Horizontal Scroll (Portfolio) */
+        .horizontal-scroll-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            padding-bottom: 2rem;
+        }
+        .horizontal-scroll-container::-webkit-scrollbar { display: none; }
+        .scroll-item {
+            flex: 0 0 calc(85vw - 2rem);
+            scroll-snap-align: center;
+            margin-right: 2rem;
+        }
+        @media (min-width: 768px) {
+            .scroll-item { flex: 0 0 calc(60vw - 2rem); }
+        }
+        @media (min-width: 1024px) {
+            .scroll-item { flex: 0 0 calc(40vw - 2rem); }
+        }
+
+        /* Custom Input Dark */
+        .input-dark {
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #F5F0E8;
+            transition: border-color 0.4s ease;
+        }
+        .input-dark:focus {
+            outline: none;
+            border-bottom-color: #D4AF77;
+        }
+        .input-dark::-webkit-calendar-picker-indicator {
+            filter: invert(1) opacity(0.5);
+            cursor: pointer;
+        }
+        
+        /* Modal Blur Backing */
+        .modal-backdrop {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.8);
+        }
+    </style>
+</head>
+<body x-data="{ mobileMenuOpen: false, modalOpen: false, modalData: {} }">
+    <div class="noise-overlay"></div>
+    
+    <!-- 1. Preloader -->
+    <div class="loading-bar"></div>
+
+    <!-- 2. Glass-morphic Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-400">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex justify-between items-center">
+            
+            <!-- Left: Minimal Links -->
+            <div class="hidden md:flex items-center space-x-12">
+                <a href="#destinations" class="text-xs uppercase tracking-[0.2em] text-ivory/70 hover:text-gold transition-colors duration-400">Destinations</a>
+                <a href="#experiences" class="text-xs uppercase tracking-[0.2em] text-ivory/70 hover:text-gold transition-colors duration-400">Experiences</a>
+            </div>
+
+            <!-- Center: Logo -->
+            <a href="#" class="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center group">
+                <span class="serif text-2xl lg:text-3xl font-medium tracking-wide text-transparent bg-clip-text bg-gold-gradient group-hover:drop-shadow-glow transition-all duration-400">BUMIKARSA</span>
+                <span class="text-[8px] lg:text-[10px] uppercase tracking-[0.3em] text-gold/80 mt-1">Hotels & Resorts</span>
+            </a>
+
+            <!-- Right: Magnetic CTA -->
+            <div class="hidden md:flex items-center">
+                <a href="#reserve" class="btn-magnetic px-8 py-2.5 text-xs font-semibold uppercase tracking-[0.15em] z-10">
+                    Reserve
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-gold focus:outline-none z-50 relative">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+                    <path x-show="mobileMenuOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Full Screen Menu -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-500"
+             x-transition:enter-start="opacity-0 backdrop-blur-none"
+             x-transition:enter-end="opacity-100 backdrop-blur-xl"
+             x-transition:leave="transition ease-in duration-500"
+             x-transition:leave-start="opacity-100 backdrop-blur-xl"
+             x-transition:leave-end="opacity-0 backdrop-blur-none"
+             x-cloak 
+             class="fixed inset-0 z-40 bg-charcoal/95 flex flex-col items-center justify-center space-y-8">
+            <a href="#destinations" @click="mobileMenuOpen = false" class="serif text-4xl text-ivory hover:text-gold transition-colors">Destinations</a>
+            <a href="#experiences" @click="mobileMenuOpen = false" class="serif text-4xl text-ivory hover:text-gold transition-colors">Experiences</a>
+            <a href="#suites" @click="mobileMenuOpen = false" class="serif text-4xl text-ivory hover:text-gold transition-colors">Signature Suites</a>
+            <div class="pt-8">
+                <a href="#reserve" @click="mobileMenuOpen = false" class="btn-magnetic px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em] inline-block text-center">Reserve a Stay</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. Cinematic Hero Section & Floating Widget -->
+    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <!-- Cinematic Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1499591934245-40b55745b905?q=80&w=2000&auto=format&fit=crop" alt="Luxury Hotel Pool at Night" class="w-full h-full object-cover object-center scale-105 transform animate-[pulse_20s_infinite_alternate]" />
+            <div class="absolute inset-0 hero-vignette"></div>
+        </div>
+
+        <!-- Dramatic Type -->
+        <div class="relative z-10 text-center px-4 mt-16">
+            <p class="text-gold uppercase tracking-[0.4em] text-xs font-light mb-6 opacity-0 animate-[fadeInUp_1s_ease_0.5s_forwards]">A Journey Beyond</p>
+            <h1 class="serif text-5xl md:text-7xl lg:text-8xl font-medium text-ivory leading-tight mb-8 opacity-0 animate-[fadeInUp_1.5s_ease_1s_forwards] drop-shadow-2xl">
+                Soul of the <br class="hidden md:block" />
+                <span class="italic text-transparent bg-clip-text bg-gold-gradient">Archipelago</span>
+            </h1>
+        </div>
+
+        <!-- Floating Date-picker Widget (Alpine) -->
+        <div id="reserve" class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 w-11/12 max-w-4xl glass-card rounded-2xl p-6 lg:p-8 opacity-0 animate-[fadeInUp_1.5s_ease_1.5s_forwards]" x-data="{ checkIn: '', checkOut: '', guests: '2' }">
+            <form class="flex flex-col md:flex-row gap-6 md:gap-8 items-end justify-between">
+                <div class="w-full md:w-1/3">
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-ivory/50 mb-2">Arrival</label>
+                    <input type="date" x-model="checkIn" class="w-full input-dark py-2 text-sm font-light">
+                </div>
+                <div class="w-full md:w-1/3">
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-ivory/50 mb-2">Departure</label>
+                    <input type="date" x-model="checkOut" class="w-full input-dark py-2 text-sm font-light">
+                </div>
+                <div class="w-full md:w-1/6">
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-ivory/50 mb-2">Guests</label>
+                    <select x-model="guests" class="w-full input-dark py-2 text-sm font-light appearance-none rounded-none">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="w-full md:w-1/4 pt-4 md:pt-0">
+                    <button type="button" class="w-full btn-magnetic py-3 text-xs uppercase tracking-[0.15em] font-medium flex items-center justify-center gap-2">
+                        Find Suites
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-ivory/30 animate-bounce">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <!-- Keyframes for Hero Intro -->
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- 4. Portfolio Horizontal Scroll Cards -->
+    <section id="destinations" class="py-32 bg-charcoal-dark border-b border-charcoal overflow-hidden">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+            <div>
+                <p class="text-gold text-xs uppercase tracking-[0.3em] mb-4">Our Residences</p>
+                <h2 class="serif text-4xl lg:text-5xl text-ivory font-light leading-tight">Sanctuaries of <br><i class="text-gold-light opacity-80">Elegance</i></h2>
+            </div>
+            <div class="hidden md:flex gap-4">
+                <button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-gold transition-colors">
+                    <svg class="w-5 h-5 text-ivory" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-gold transition-colors">
+                    <svg class="w-5 h-5 text-ivory" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="horizontal-scroll-container pl-6 lg:pl-12">
+            
+            <!-- Card 1 -->
+            <div class="scroll-item reveal-border cursor-pointer group">
+                <div class="relative h-[60vh] w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop" alt="Jakarta Premium" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-800"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-xs text-gold uppercase tracking-[0.2em] mb-2 text-slide-up">Capital Sanctuary</p>
+                                <h3 class="serif text-3xl text-ivory mb-2">Hotel Bidakara Jakarta</h3>
+                                <p class="text-sm text-ivory/60 font-light max-w-sm text-slide-up">An oasis of tranquility amidst the dynamic pulse of the metropolitan, featuring world-class amenities.</p>
+                            </div>
+                            <div class="text-slide-up hidden md:block">
+                                <span class="text-ivory/50 uppercase text-[10px] tracking-widest block mb-1">Explore</span>
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="scroll-item reveal-border cursor-pointer group">
+                <div class="relative h-[60vh] w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1000&auto=format&fit=crop" alt="Sentul Resort" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-800"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-xs text-gold uppercase tracking-[0.2em] mb-2 text-slide-up">Highland Retreat</p>
+                                <h3 class="serif text-3xl text-ivory mb-2">Green Wattana Sentul</h3>
+                                <p class="text-sm text-ivory/60 font-light max-w-sm text-slide-up">Embrace nature's serenade in our exclusive villas, nestled within pristine mountain landscapes.</p>
+                            </div>
+                            <div class="text-slide-up hidden md:block">
+                                <span class="text-ivory/50 uppercase text-[10px] tracking-widest block mb-1">Explore</span>
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="scroll-item reveal-border cursor-pointer group">
+                <div class="relative h-[60vh] w-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1499591934245-40b55745b905?q=80&w=1000&auto=format&fit=crop" alt="Cianjur Resort" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-800"></div>
+                    
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-xs text-gold uppercase tracking-[0.2em] mb-2 text-slide-up">Heritage Estate</p>
+                                <h3 class="serif text-3xl text-ivory mb-2">Sangga Buana Resort</h3>
+                                <p class="text-sm text-ivory/60 font-light max-w-sm text-slide-up">A timeless blend of archaic charm and modern luxury in the heart of West Java.</p>
+                            </div>
+                            <div class="text-slide-up hidden md:block">
+                                <span class="text-ivory/50 uppercase text-[10px] tracking-widest block mb-1">Explore</span>
+                                <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty item to allow full scroll -->
+            <div class="flex-[0_0_2rem]"></div>
+        </div>
+    </section>
+
+    <!-- 5. "The Bidakara Experience" Masonry / Asymmetric Grid -->
+    <section id="experiences" class="py-32 bg-dark-gold-bg relative">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="text-center mb-20">
+                <h2 class="serif text-4xl lg:text-5xl text-ivory font-light mb-4">Curated Experiences</h2>
+                <div class="w-px h-16 bg-gold mx-auto opacity-50"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:h-[800px]">
+                
+                <!-- Large Item (Weddings) -->
+                <div class="md:col-span-12 lg:col-span-7 relative overflow-hidden group h-96 lg:h-full cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-800" alt="Luxury Weddings">
+                    <div class="absolute inset-0 bg-charcoal/40 group-hover:bg-charcoal/20 transition-all duration-800"></div>
+                    <div class="absolute inset-0 flex flex-col justify-end p-8 lg:p-12">
+                        <h3 class="serif text-4xl lg:text-5xl text-ivory mb-4 transform translate-y-4 opacity-80 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">Timeless Unions</h3>
+                        <p class="text-ivory/80 font-light max-w-md transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400 delay-100">Bespoke wedding experiences curated in exquisite detail within our grand ballrooms and lush gardens.</p>
+                        <div class="w-0 h-px bg-gold mt-6 group-hover:w-24 transition-all duration-800 ease-in-out"></div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-12 lg:col-span-5 grid grid-rows-2 gap-6 md:gap-8 lg:h-full">
+                    
+                    <!-- Top Right (Culinary) -->
+                    <div class="relative overflow-hidden group h-64 lg:h-auto cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-800" alt="Fine Dining">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-charcoal-dark opacity-90"></div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-8">
+                            <span class="text-[10px] uppercase text-gold tracking-[0.2em] mb-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">Gastronomy</span>
+                            <h3 class="serif text-3xl text-ivory">Culinary Journeys</h3>
+                            <div class="w-0 h-px bg-gold mt-4 group-hover:w-16 transition-all duration-800 ease-in-out"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Right (Wellness) -->
+                    <div class="relative overflow-hidden group h-64 lg:h-auto cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-800" alt="Spa and Wellness">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-charcoal-dark opacity-90"></div>
+                        <div class="absolute inset-0 flex flex-col justify-end p-8">
+                            <span class="text-[10px] uppercase text-gold tracking-[0.2em] mb-2 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-400">Rejuvenation</span>
+                            <h3 class="serif text-3xl text-ivory">Holistic Wellness</h3>
+                            <div class="w-0 h-px bg-gold mt-4 group-hover:w-16 transition-all duration-800 ease-in-out"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Signature Suites (Filterable Cards with Modal) -->
+    <section id="suites" class="py-32 bg-charcoal">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="serif text-4xl lg:text-5xl text-ivory font-light mb-4">Signature Collections</h2>
+                    <p class="text-ivory/60 font-light max-w-lg">Opulent spaces meticulously designed for the discerning traveler, blending local heritage with unparalleled comfort.</p>
+                </div>
+                <!-- Categories (Static visual for now, handled via Alpine logic in advanced setups) -->
+                <div class="flex gap-6 border-b border-white/10 pb-2">
+                    <button class="text-gold text-xs uppercase tracking-[0.1em] font-medium">All Suites</button>
+                    <button class="text-ivory/40 hover:text-ivory text-xs uppercase tracking-[0.1em] transition-colors">Presidential</button>
+                    <button class="text-ivory/40 hover:text-ivory text-xs uppercase tracking-[0.1em] transition-colors">Villas</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Suite 1 -->
+                <div class="group cursor-pointer" @click="modalOpen = true; modalData = { name: 'Royal Pavilion Suite', size: '120 sqm', img: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800&auto=format&fit=crop', desc: 'The pinnacle of luxury living. Features a private dining area, panoramic city views, and dedicated butler service 24/7.' }">
+                    <div class="overflow-hidden relative h-80 mb-6">
+                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-duration-800" alt="Royal Suite">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-400"></div>
+                        <div class="absolute top-4 right-4 bg-charcoal-dark/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gold uppercase tracking-widest border border-gold/30">Quick View</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="serif text-2xl text-ivory group-hover:text-gold transition-colors">Royal Pavilion Suite</h4>
+                        </div>
+                        <p class="text-xs text-ivory/50 uppercase tracking-widest mb-4">120 Sqm | Skyline View | Butler</p>
+                    </div>
+                </div>
+
+                <!-- Suite 2 -->
+                <div class="group cursor-pointer" @click="modalOpen = true; modalData = { name: 'Executive Grand Room', size: '65 sqm', img: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop', desc: 'Sophisticated design tailored for the modern executive. Features a dedicated workspace and access to the exclusive club lounge.' }">
+                    <div class="overflow-hidden relative h-80 mb-6">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-duration-800" alt="Executive Room">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-400"></div>
+                        <div class="absolute top-4 right-4 bg-charcoal-dark/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gold uppercase tracking-widest border border-gold/30">Quick View</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="serif text-2xl text-ivory group-hover:text-gold transition-colors">Executive Grand</h4>
+                        </div>
+                        <p class="text-xs text-ivory/50 uppercase tracking-widest mb-4">65 Sqm | Club Access | Smart Home</p>
+                    </div>
+                </div>
+
+                <!-- Suite 3 -->
+                <div class="group cursor-pointer" @click="modalOpen = true; modalData = { name: 'Highland Pool Villa', size: '200 sqm', img: 'https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=800&auto=format&fit=crop', desc: 'A secluded sanctuary surrounded by nature. Features a private infinity pool, outdoor pavilion, and unparalleled mountain serenity.' }">
+                    <div class="overflow-hidden relative h-80 mb-6">
+                        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transform group-hover:scale-105 transition-duration-800" alt="Private Villa">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-400"></div>
+                        <div class="absolute top-4 right-4 bg-charcoal-dark/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-gold uppercase tracking-widest border border-gold/30">Quick View</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="serif text-2xl text-ivory group-hover:text-gold transition-colors">Highland Pool Villa</h4>
+                        </div>
+                        <p class="text-xs text-ivory/50 uppercase tracking-widest mb-4">200 Sqm | Private Pool | Nature Retreat</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Suites Quick View Modal (Alpine) -->
+        <div x-show="modalOpen" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <!-- Background Backdrop -->
+            <div x-show="modalOpen" 
+                 x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" 
+                 x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" 
+                 class="fixed inset-0 modal-backdrop transition-opacity" @click="modalOpen = false"></div>
+
+            <!-- Modal Panel -->
+            <div x-show="modalOpen" 
+                 x-transition:enter="ease-out duration-400" x-transition:enter-start="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                 x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-8 sm:translate-y-0 sm:scale-95" 
+                 class="relative bg-charcoal border border-gold/20 shadow-2xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row h-[80vh] md:h-[60vh]">
+                
+                <button @click="modalOpen = false" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-ivory hover:text-gold hover:bg-black/60 transition-colors">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+
+                <div class="w-full md:w-3/5 h-1/2 md:h-full relative">
+                    <img :src="modalData.img" class="absolute inset-0 w-full h-full object-cover" alt="Suite Image">
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-charcoal hidden md:block"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent md:hidden block"></div>
+                </div>
+
+                <div class="w-full md:w-2/5 p-8 flex flex-col justify-center bg-charcoal">
+                    <p class="text-[10px] text-gold uppercase tracking-[0.2em] mb-2" x-text="modalData.size"></p>
+                    <h3 class="serif text-3xl text-ivory mb-6" x-text="modalData.name"></h3>
+                    <p class="text-ivory/70 font-light text-sm leading-relaxed mb-8" x-text="modalData.desc"></p>
+                    
+                    <div class="mt-auto">
+                        <button class="w-full btn-magnetic py-3 text-xs uppercase tracking-[0.15em] font-medium border-gold">Check Availability</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Testimonial Soft Carousel (Dark Mode) -->
+    <section class="py-24 bg-charcoal-dark border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10" x-data="{ activeSlide: 1 }">
+            <svg class="w-12 h-12 text-gold/30 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+            
+            <div class="relative min-h-[150px]">
+                <div x-show="activeSlide === 1" x-transition.opacity.duration.800ms class="absolute inset-0">
+                    <p class="serif text-2xl md:text-3xl text-ivory/90 leading-relaxed italic mb-8">"An immaculate experience. The attention to detail in the architecture and the warmth of the Indonesian hospitality redefined luxury for me."</p>
+                    <div class="text-gold text-xs uppercase tracking-[0.2em]">Alexander Wright</div>
+                    <div class="text-ivory/40 text-[10px] uppercase tracking-widest mt-1">Diplomat Magazine</div>
+                </div>
+                <div x-show="activeSlide === 2" x-transition.opacity.duration.800ms class="absolute inset-0" x-cloak>
+                    <p class="serif text-2xl md:text-3xl text-ivory/90 leading-relaxed italic mb-8">"The perfect harmony between corporate efficiency and resort serenity. Our leadership retreat was executed flawlessly."</p>
+                    <div class="text-gold text-xs uppercase tracking-[0.2em]">Elena Rostova</div>
+                    <div class="text-ivory/40 text-[10px] uppercase tracking-widest mt-1">Global Tech CEO</div>
+                </div>
+            </div>
+
+            <!-- Custom Pagination -->
+            <div class="flex justify-center gap-3 mt-12">
+                <button @click="activeSlide = 1" :class="{'w-8 bg-gold': activeSlide === 1, 'w-2 bg-ivory/20': activeSlide !== 1}" class="h-1 rounded-full transition-all duration-400"></button>
+                <button @click="activeSlide = 2" :class="{'w-8 bg-gold': activeSlide === 2, 'w-2 bg-ivory/20': activeSlide !== 2}" class="h-1 rounded-full transition-all duration-400"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Full-width Brand Manifesto -->
+    <section class="py-32 bg-footer-gradient relative border-t border-gold/10">
+        <div class="max-w-[1000px] mx-auto px-6 text-center">
+            <h2 class="serif text-3xl md:text-5xl text-ivory font-light leading-tight mb-8">Elevating Indonesian Elegance <br>to the World Stage</h2>
+            <p class="text-ivory/70 font-light max-w-2xl mx-auto leading-relaxed mb-16">Since our inception, Bumikarsa Bidakara has been committed to weaving the rich tapestry of local heritage into unparalleled standards of global hospitality. Every property is a canvas, every service an art form.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gold/20 pt-16">
+                <!-- Iconic Rows -->
+                <div class="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+                    <svg class="w-8 h-8 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="text-[10px] text-ivory uppercase tracking-[0.15em]">Global Standards</span>
+                </div>
+                <div class="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+                    <svg class="w-8 h-8 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    <span class="text-[10px] text-ivory uppercase tracking-[0.15em]">Cultural Heritage</span>
+                </div>
+                <div class="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+                    <svg class="w-8 h-8 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                    <span class="text-[10px] text-ivory uppercase tracking-[0.15em]">Bespoke Service</span>
+                </div>
+                <div class="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+                    <svg class="w-8 h-8 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <span class="text-[10px] text-ivory uppercase tracking-[0.15em]">Masterful Architecture</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Rich Footer Gradient Dark -> Gold Accent -->
+    <footer class="bg-[#110e0a] pt-24 pb-12 border-t border-gold/20">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+                
+                <!-- Brand -->
+                <div class="md:col-span-12 lg:col-span-4">
+                    <a href="#" class="flex flex-col items-start group mb-6">
+                        <span class="serif text-2xl font-medium tracking-wide text-transparent bg-clip-text bg-gold-gradient">BUMIKARSA</span>
+                        <span class="text-[9px] uppercase tracking-[0.3em] text-gold/80 mt-1">Hotels & Resorts</span>
+                    </a>
+                    <p class="text-ivory/60 font-light text-sm max-w-sm mb-6">Curating extraordinary moments in Indonesia's most prestigious locations.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-charcoal transition-colors">
+                            <span class="text-xs">In</span> <!-- Icon placeholer for styling -->
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-gold/30 flex items-center justify-center text-gold hover:bg-gold hover:text-charcoal transition-colors">
+                            <span class="text-xs">Fb</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="md:col-span-4 lg:col-span-2">
+                    <h4 class="text-[10px] text-gold uppercase tracking-[0.2em] mb-6">Collections</h4>
+                    <ul class="space-y-4 text-sm font-light text-ivory/70">
+                        <li><a href="#" class="hover:text-gold transition-colors">Jakarta</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Sentul</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Surabaya</a></li>
+                        <li><a href="#" class="hover:text-gold transition-colors">Bandung</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 lg:col-span-2">
+                    <h4 class="text-[10px] text-gold uppercase tracking-[0.2em] mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm font-light text-ivory/70">
+                        <li><p class="hover:text-gold transition-colors cursor-pointer">Concierge Desk</p></li>
+                        <li><p class="hover:text-gold transition-colors cursor-pointer">(+62) 021 8379 3555</p></li>
+                        <li><a href="mailto:reservation@bumikarsa-bidakarahotels.com" class="hover:text-gold transition-colors">Email Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="md:col-span-4 lg:col-span-4">
+                    <h4 class="text-[10px] text-gold uppercase tracking-[0.2em] mb-6">The Privilege</h4>
+                    <p class="text-xs text-ivory/50 font-light mb-6">Subscribe to receive invitations to private events and exclusive seasonal offers.</p>
+                    <form class="relative">
+                        <input type="email" placeholder="Email Address" class="w-full bg-transparent border-b border-gold/30 py-3 text-sm text-ivory focus:outline-none focus:border-gold pr-12">
+                        <button type="submit" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-gold hover:text-ivory transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-gold/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-ivory/40">
+                <p>&copy; 2026 Bumikarsa Bidakara. All Privileges Reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-gold transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-gold transition-colors">Terms</a>
+                    <a href="#" class="hover:text-gold transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

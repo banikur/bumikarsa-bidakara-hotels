@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumikarsa Bidakara | Premier MICE Destination</title>
+    <meta name="description" content="Discover Indonesia's premier MICE destination. Professional, high-capacity venues including the iconic 3000-pax Birawa Assembly Hall. Book your corporate event today.">
+    
+    <!-- Google Fonts: Inter (Body) & Helvetica-like sans system font stack for Headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0A192F',
+                            light: '#001F3F',
+                            dark: '#050d1a',
+                        },
+                        gold: {
+                            DEFAULT: '#C9A96E',
+                            light: '#d4b98c',
+                            dark: '#ae8c4b',
+                        },
+                        cream: '#FAFAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['"Neue Haas Grotesk Display Pro"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neumorphic': '10px 10px 20px #e6e6e6, -10px -10px 20px #ffffff',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFC; color: #1a1a1a; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -0.02em; }
+        
+        /* Sharp UI Elements */
+        .sharp { border-radius: 0px !important; }
+        
+        /* Primary Navy CTA */
+        .btn-primary {
+            background-color: #0A192F;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #C9A96E;
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn-primary:hover::before { transform: scaleX(1); }
+        .btn-primary:hover { transform: scale(1.02); color: #0A192F; box-shadow: 0 10px 15px -3px rgba(10, 25, 47, 0.3); }
+
+        /* Secondary Outline CTA */
+        .btn-outline {
+            border: 1px solid #0A192F;
+            color: #0A192F;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover { background-color: #0A192F; color: white; }
+
+        /* Table Styling */
+        .data-table th { background-color: #0A192F; color: white; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; padding: 1rem; border: none;}
+        .data-table td { padding: 1rem; border-bottom: 1px solid #e2e8f0; font-size: 0.875rem; color: #4a5568; }
+        .data-table tr:hover td { background-color: #f8fafc; }
+        
+        /* Hero Overlay */
+        .hero-overlay { background: linear-gradient(90deg, rgba(10, 25, 47, 0.9) 0%, rgba(10, 25, 47, 0.4) 100%); }
+
+        /* Custom Input Styling */
+        input:focus, select:focus { outline: none; border-color: #0A192F; box-shadow: 0 0 0 1px #0A192F; }
+    </style>
+</head>
+<body class="antialiased" x-data="{ mobileMenuOpen: false }">
+
+    <!-- 1. STICKY NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex flex-col">
+                    <span class="font-heading font-bold text-navy text-xl leading-none">BUMIKARSA</span>
+                    <span class="text-gold text-[10px] font-semibold tracking-[0.2em] uppercase mt-1">Hotels Management</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#venues" class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Venues</a>
+                    <a href="#properties" class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Properties</a>
+                    <a href="#why-us" class="text-sm font-medium text-gray-600 hover:text-navy transition-colors">Why Us</a>
+                    <div class="h-4 w-px bg-gray-300"></div>
+                    <a href="#" class="text-sm font-medium text-navy flex items-center gap-2 hover:text-gold transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        Corporate Login
+                    </a>
+                    <a href="#enquire" class="btn-primary sharp px-6 py-2.5 text-sm font-semibold uppercase tracking-wider">Book Meeting</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-navy focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="mobileMenuOpen" x-cloak stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div x-show="mobileMenuOpen" x-transition x-cloak class="md:hidden bg-white border-t border-gray-200 absolute w-full left-0 shadow-lg">
+            <div class="px-4 py-6 space-y-4 flex flex-col">
+                <a href="#venues" @click="mobileMenuOpen = false" class="text-base font-medium text-gray-800">Venues</a>
+                <a href="#properties" @click="mobileMenuOpen = false" class="text-base font-medium text-gray-800">Properties</a>
+                <a href="#why-us" @click="mobileMenuOpen = false" class="text-base font-medium text-gray-800">Why Us</a>
+                <div class="border-t border-gray-100 pt-4 mt-2">
+                    <a href="#" class="text-base font-medium text-navy flex items-center gap-2 mb-4">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        Corporate Login
+                    </a>
+                    <a href="#enquire" @click="mobileMenuOpen = false" class="btn-primary sharp block text-center px-6 py-3 text-sm font-semibold uppercase tracking-wider w-full">Book Meeting</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION & ENQUIRY BAR -->
+    <section class="relative min-h-[85vh] flex items-center pt-20 pb-32 lg:pt-0 lg:pb-0">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2698&auto=format&fit=crop" alt="Grand Ballroom Corporate Event" class="w-full h-full object-cover object-center" />
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="max-w-3xl">
+                <div class="inline-block bg-white/10 backdrop-blur-sm border border-white/20 sharp px-4 py-1.5 mb-6">
+                    <span class="text-gold text-xs font-bold tracking-[0.15em] uppercase">Professional Corporate Events</span>
+                </div>
+                <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                    Indonesia's Premier <br/>
+                    <span class="text-gold">MICE Destination</span>
+                </h1>
+                <p class="text-gray-300 text-lg sm:text-xl font-light max-w-2xl mb-12">
+                    Engineered for high-performance business gatherings. From executive boardrooms to the iconic 3,000-pax Birawa Assembly Hall.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#enquire" class="btn-primary sharp px-8 py-4 text-sm font-semibold uppercase tracking-wider text-center flex items-center justify-center gap-2">
+                        Get Custom Quote
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                    <a href="#venues" class="bg-transparent border border-white text-white sharp px-8 py-4 text-sm font-semibold uppercase tracking-wider text-center hover:bg-white hover:text-navy transition-colors">
+                        Explore Venues
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Booking Bar -->
+        <div class="absolute bottom-0 left-0 w-full transform translate-y-1/2 z-20 hidden lg:block" id="enquire">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="bg-white shadow-2xl sharp border-t-4 border-navy p-2 flex items-center justify-center" x-data="{ venue: '', date: '', pax: '', code: '' }">
+                    <form class="flex w-full divide-x divide-gray-200">
+                        <!-- Date -->
+                        <div class="flex-1 px-6 py-4">
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Event Date</label>
+                            <input type="date" x-model="date" class="w-full text-sm font-medium text-navy bg-transparent border-0 p-0 focus:ring-0 cursor-pointer">
+                        </div>
+                        <!-- Pax -->
+                        <div class="flex-1 px-6 py-4">
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Attendees (Pax)</label>
+                            <input type="number" x-model="pax" placeholder="e.g. 500" class="w-full text-sm font-medium text-navy placeholder-gray-300 bg-transparent border-0 p-0 focus:ring-0">
+                        </div>
+                        <!-- Venue Type -->
+                        <div class="flex-1 px-6 py-4 relative">
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Venue Type</label>
+                            <select x-model="venue" class="w-full text-sm font-medium text-navy bg-transparent border-0 p-0 focus:ring-0 cursor-pointer appearance-none">
+                                <option value="" disabled selected>Select Format</option>
+                                <option>Convention / Exhibition</option>
+                                <option>Corporate Meeting</option>
+                                <option>Gala Dinner / Banquet</option>
+                                <option>Training / Seminar</option>
+                            </select>
+                            <svg class="w-4 h-4 text-gray-400 absolute right-6 top-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <!-- Promo -->
+                        <div class="w-48 px-6 py-4">
+                            <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Corporate Code</label>
+                            <input type="text" x-model="code" placeholder="Optional" class="w-full text-sm font-medium text-navy placeholder-gray-300 bg-transparent border-0 p-0 focus:ring-0">
+                        </div>
+                        <!-- Submit -->
+                        <div class="w-48 pl-2">
+                            <button type="button" class="w-full h-full btn-primary sharp text-sm font-bold uppercase tracking-wider flex items-center justify-center">
+                                Check Availability
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Booking Form (Visible only on small screens) -->
+    <section class="bg-navy py-12 px-4 lg:hidden" id="enquire-mobile">
+        <div class="max-w-md mx-auto">
+            <h2 class="font-heading text-2xl font-bold text-white mb-6">Quick Enquiry</h2>
+            <form class="space-y-4 bg-white p-6 sharp">
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Event Date</label>
+                    <input type="date" class="w-full border-b border-gray-300 py-2 text-sm text-navy focus:border-navy focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Attendees (Pax)</label>
+                    <input type="number" placeholder="e.g. 500" class="w-full border-b border-gray-300 py-2 text-sm text-navy focus:border-navy focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Venue Type</label>
+                    <select class="w-full border-b border-gray-300 py-2 text-sm text-navy focus:border-navy focus:outline-none bg-transparent">
+                        <option>Convention / Exhibition</option>
+                        <option>Corporate Meeting</option>
+                        <option>Gala Dinner</option>
+                    </select>
+                </div>
+                <button type="button" class="w-full btn-primary sharp py-4 text-sm font-bold uppercase tracking-wider mt-4">Check Availability</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 3. VENUE CAPACITIES (Data-Driven Table) -->
+    <section id="venues" class="py-24 lg:pt-32 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-gray-200 pb-6">
+                <div class="max-w-2xl">
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold text-navy mb-4">Venue Specifications</h2>
+                    <p class="text-gray-600">Explore our high-capacity halls and versatile meeting spaces designed for scale, acoustics, and seamless execution.</p>
+                </div>
+                <div class="mt-6 md:mt-0 flex gap-4">
+                    <button class="btn-outline sharp px-6 py-2 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Brochure (PDF)
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white shadow-card sharp overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/3">Venue Name / Profile</th>
+                                <th>Area (m²)</th>
+                                <th>Theatre</th>
+                                <th>Classroom</th>
+                                <th>Banquet</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <!-- Row 1 -->
+                            <tr class="group">
+                                <td>
+                                    <div class="font-semibold text-navy">Birawa Assembly Hall</div>
+                                    <div class="text-xs text-gray-500 mt-1">Column-free Grand Ballroom, Ground Floor</div>
+                                </td>
+                                <td class="font-mono text-xs">2,025</td>
+                                <td class="font-semibold">3,000</td>
+                                <td>1,500</td>
+                                <td>1,200</td>
+                                <td class="text-right">
+                                    <a href="#" class="text-gold font-semibold text-xs uppercase tracking-widest hover:text-navy transition-colors">Request Quote &rarr;</a>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="group">
+                                <td>
+                                    <div class="font-semibold text-navy">Binakarna Auditorium</div>
+                                    <div class="text-xs text-gray-500 mt-1">Tiered seating, acoustic optimized</div>
+                                </td>
+                                <td class="font-mono text-xs">1,100</td>
+                                <td class="font-semibold">1,200</td>
+                                <td>600</td>
+                                <td>500</td>
+                                <td class="text-right">
+                                    <a href="#" class="text-gold font-semibold text-xs uppercase tracking-widest hover:text-navy transition-colors">Request Quote &rarr;</a>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="group">
+                                <td>
+                                    <div class="font-semibold text-navy">Cendrawasih Room</div>
+                                    <div class="text-xs text-gray-500 mt-1">Divisible into 3 breakout rooms</div>
+                                </td>
+                                <td class="font-mono text-xs">800</td>
+                                <td class="font-semibold">800</td>
+                                <td>400</td>
+                                <td>300</td>
+                                <td class="text-right">
+                                    <a href="#" class="text-gold font-semibold text-xs uppercase tracking-widest hover:text-navy transition-colors">Request Quote &rarr;</a>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="bg-indigo-50/30">
+                                <td>
+                                    <div class="font-semibold text-navy">Executive Boardrooms (x8)</div>
+                                    <div class="text-xs text-gray-500 mt-1">Premium tech, private lounge access</div>
+                                </td>
+                                <td class="font-mono text-xs">60 - 120</td>
+                                <td class="font-semibold">-</td>
+                                <td>20 - 40</td>
+                                <td>-</td>
+                                <td class="text-right">
+                                    <a href="#" class="text-gold font-semibold text-xs uppercase tracking-widest hover:text-navy transition-colors">Request Quote &rarr;</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-gray-50 p-4 border-t border-gray-200 text-center text-xs text-gray-500 flex justify-center items-center gap-6">
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-navy rounded-full"></div> High-Speed Wi-Fi Included</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-navy rounded-full"></div> Loading Dock Access</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-navy rounded-full"></div> On-site AV Tech Team</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. OUR PROPERTIES (Corporate Cards) -->
+    <section id="properties" class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-navy mb-4">Strategic Business Locations</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Access our network of managed properties designed for corporate stays and regional meetings across key commercial hubs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Property 1 -->
+                <div class="bg-white border border-gray-200 sharp transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1555899434-94d1368d7dd6?q=80&w=800&auto=format&fit=crop" alt="Jakarta Property" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <div class="absolute top-4 left-4 bg-navy text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 sharp">Headquarters</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold text-navy mb-1">Hotel Bidakara Jakarta</h3>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Pancoran, South Jakarta
+                        </p>
+                        <div class="space-y-2 mb-6 border-t border-gray-100 pt-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Rooms</span>
+                                <span class="font-semibold text-navy">174 Executive Rooms</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">MICE Capacity</span>
+                                <span class="font-semibold text-navy">Up to 3,000 Pax</span>
+                            </div>
+                        </div>
+                        <a href="#" class="block w-full text-center border border-navy text-navy font-semibold text-sm py-2 hover:bg-navy hover:text-white transition-colors sharp">View Factsheet</a>
+                    </div>
+                </div>
+
+                <!-- Property 2 -->
+                <div class="bg-white border border-gray-200 sharp transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c0d12444?q=80&w=800&auto=format&fit=crop" alt="Surabaya Property" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-800 text-[10px] font-bold uppercase tracking-widest px-3 py-1 sharp">Associate Hub</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold text-navy mb-1">Bisanta Bidakara Surabaya</h3>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Tegalsari, Surabaya
+                        </p>
+                        <div class="space-y-2 mb-6 border-t border-gray-100 pt-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Rooms</span>
+                                <span class="font-semibold text-navy">106 Business Rooms</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">MICE Capacity</span>
+                                <span class="font-semibold text-navy">5 Meeting Rooms</span>
+                            </div>
+                        </div>
+                        <a href="#" class="block w-full text-center border border-navy text-navy font-semibold text-sm py-2 hover:bg-navy hover:text-white transition-colors sharp">View Factsheet</a>
+                    </div>
+                </div>
+
+                <!-- Property 3 -->
+                <div class="bg-white border border-gray-200 sharp transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl group">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop" alt="Bandung Property" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <div class="absolute top-4 left-4 bg-gray-100 text-gray-800 text-[10px] font-bold uppercase tracking-widest px-3 py-1 sharp">Associate Boutique</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading text-xl font-bold text-navy mb-1">Fabu Hotel Bandung</h3>
+                        <p class="text-sm text-gray-500 mb-4 flex items-center gap-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Kebon Jeruk, Bandung
+                        </p>
+                        <div class="space-y-2 mb-6 border-t border-gray-100 pt-4">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Rooms</span>
+                                <span class="font-semibold text-navy">86 Modern Rooms</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-500">Highlight</span>
+                                <span class="font-semibold text-navy">Near Stasiun Bandung</span>
+                            </div>
+                        </div>
+                        <a href="#" class="block w-full text-center border border-navy text-navy font-semibold text-sm py-2 hover:bg-navy hover:text-white transition-colors sharp">View Factsheet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHY CHOOSE BIDAKARA (Data & Stats) -->
+    <section id="why-us" class="py-24 bg-navy text-white relative overflow-hidden">
+        <!-- Geometric Accent -->
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 2px, transparent 2px, transparent 15px);"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-heading text-3xl sm:text-4xl font-bold mb-6">Built for Corporate Excellence</h2>
+                    <p class="text-gray-400 text-lg font-light leading-relaxed mb-8">
+                        With over two decades of hospitality management experience, Bumikarsa Bidakara provides the infrastructure, service standards, and strategic locations required by state-owned enterprises, multinational corporations, and government bodies.
+                    </p>
+                    <a href="#contact" class="inline-block border-b-2 border-gold text-gold font-bold uppercase tracking-widest pb-1 hover:text-white hover:border-white transition-colors">Partner With Us</a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6">
+                    <!-- Stat 1 -->
+                    <div class="border border-white/10 sharp p-6 bg-white/5 backdrop-blur-sm">
+                        <div class="font-heading leading-none text-5xl font-bold text-gold mb-2">20<span class="text-3xl">+</span></div>
+                        <div class="text-sm font-medium uppercase tracking-wider text-gray-300">Years Experience</div>
+                    </div>
+                    <!-- Stat 2 -->
+                    <div class="border border-white/10 sharp p-6 bg-white/5 backdrop-blur-sm">
+                        <div class="font-heading leading-none text-5xl font-bold text-gold mb-2">35<span class="text-3xl">k</span></div>
+                        <div class="text-sm font-medium uppercase tracking-wider text-gray-300">Sqm Total Venue</div>
+                    </div>
+                    <!-- Stat 3 -->
+                    <div class="border border-white/10 sharp p-6 bg-white/5 backdrop-blur-sm">
+                        <div class="font-heading leading-none text-5xl font-bold text-gold mb-2">10</div>
+                        <div class="text-sm font-medium uppercase tracking-wider text-gray-300">Managed Properties</div>
+                    </div>
+                    <!-- Stat 4 -->
+                    <div class="border border-white/10 sharp p-6 bg-white/5 backdrop-blur-sm">
+                        <div class="font-heading leading-none text-5xl font-bold text-gold mb-2">ISO</div>
+                        <div class="text-sm font-medium uppercase tracking-wider text-gray-300">Certified Services</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LOGOS & TRUST -->
+    <section class="py-16 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Trusted by Leading Organizations</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Placeholder for corporate logos. In a real project, replace with actual SVG/PNG logos -->
+                <div class="font-heading font-bold text-xl text-navy">Bank Indonesia</div>
+                <div class="font-heading font-bold text-xl text-navy">Pertamina</div>
+                <div class="font-heading font-bold text-xl text-navy">Kementerian Keuangan</div>
+                <div class="font-heading font-bold text-xl text-navy">Telkom Indonesia</div>
+                <div class="font-heading font-bold text-xl text-navy">PLN</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer id="contact" class="bg-cream pt-20 pb-10 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Branding -->
+                <div class="lg:col-span-1">
+                    <span class="font-heading font-bold text-navy text-xl leading-none block mb-2">BUMIKARSA</span>
+                    <p class="text-sm text-gray-500 mb-6">Corporate hospitality and facility management built on trust and Indonesian values.</p>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-navy uppercase tracking-wider text-sm mb-4">Contact Sales</h4>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li><strong>T:</strong> (+62) 021 8379 3555</li>
+                        <li><strong>E:</strong> reservation@bumikarsa-bidakarahotels.com</li>
+                        <li class="pt-2">
+                            Jl. Jend. Gatot Subroto Kav. 71-73<br>
+                            Pancoran, Jakarta Selatan 12870<br>
+                            Indonesia
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-navy uppercase tracking-wider text-sm mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="#" class="hover:text-navy transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-navy transition-colors">Portfolio</a></li>
+                        <li><a href="#" class="hover:text-navy transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-navy transition-colors">Whistleblowing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-navy uppercase tracking-wider text-sm mb-4">Corporate Updates</h4>
+                    <p class="text-xs text-gray-500 mb-4">Subscribe to receive factsheet updates and exclusive MICE promotions.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Corporate Email" class="w-full border border-gray-300 sharp px-3 py-2 text-sm focus:border-navy focus:outline-none bg-white">
+                        <button type="submit" class="bg-navy text-white sharp px-4 py-2 font-bold text-sm tracking-wider hover:bg-gold transition-colors">JOIN</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-300 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-500">© 2026 Bumikarsa Bidakara Hotels Management. All rights reserved.</p>
+                <div class="flex gap-4 text-xs text-gray-500">
+                    <a href="#" class="hover:text-navy transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-navy transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

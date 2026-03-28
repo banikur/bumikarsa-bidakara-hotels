@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bumikarsa Bidakara Hotels Management — Refined Indonesian Hospitality</title>
+    <meta name="description" content="A distinguished hospitality management group. Portfolio of curated hotels, MICE excellence, and bespoke service across Indonesia since 2000." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ─── TOKENS ─── */
+        :root {
+            --parchment: #F7F1E6;
+            --parchment-dark: #EDE4D3;
+            --sand: #D4B896;
+            --gold: #B8924A;
+            --gold-light: #C9A96E;
+            --espresso: #2C1A0E;
+            --bark: #4A3728;
+            --ink: #1C1007;
+            --mist: #8B7B6B;
+            --cream: #FDFAF5;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--espresso);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ─── TYPOGRAPHY ─── */
+        .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+        /* ─── UTILITIES ─── */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+        @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+        .ornament {
+            display: inline-block;
+            width: 36px; height: 1px;
+            background: var(--gold);
+            vertical-align: middle;
+            margin: 0 14px;
+        }
+
+        .eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.4s ease, padding 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(247, 241, 230, 0.96);
+            backdrop-filter: blur(12px);
+            padding: 16px 40px;
+            border-bottom: 1px solid rgba(184, 146, 74, 0.15);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--cream);
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition: color 0.4s;
+            line-height: 1.2;
+        }
+
+        nav.scrolled .nav-logo { color: var(--espresso); }
+
+        .nav-logo span {
+            display: block;
+            font-size: 9px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(253, 250, 245, 0.75);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav.scrolled .nav-links a { color: var(--bark); }
+        .nav-links a:hover { color: var(--gold) !important; }
+
+        .nav-cta {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--espresso);
+            background: var(--gold);
+            padding: 10px 24px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .nav-cta:hover { background: var(--espresso); color: var(--gold); }
+
+        @media (max-width: 900px) { .nav-links { display: none; } }
+
+        /* ─── HERO ─── */
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800&q=80') center/cover no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(28, 16, 7, 0.82) 0%,
+                rgba(28, 16, 7, 0.45) 45%,
+                rgba(28, 16, 7, 0.12) 100%
+            );
+        }
+
+        /* Subtle parchment grain */
+        .hero-grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 40px 80px;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-eyebrow { color: var(--gold-light); margin-bottom: 20px; }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(52px, 7vw, 96px);
+            font-weight: 300;
+            line-height: 1.06;
+            color: var(--cream);
+            letter-spacing: -0.01em;
+            max-width: 900px;
+            margin-bottom: 28px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--sand);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            font-weight: 300;
+            color: rgba(253, 250, 245, 0.72);
+            max-width: 440px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--espresso);
+            background: var(--gold);
+            padding: 14px 36px;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-primary:hover { background: var(--cream); }
+
+        .btn-ghost {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(253, 250, 245, 0.7);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(184, 146, 74, 0.4);
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .btn-ghost:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 36px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(253, 250, 245, 0.45);
+            z-index: 10;
+        }
+
+        .scroll-line {
+            width: 40px; height: 1px;
+            background: rgba(184, 146, 74, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -40px;
+            width: 40px; height: 1px;
+            background: var(--gold);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        @keyframes scrollLine { 
+            0% { left: -40px; } 
+            100% { left: 40px; } 
+        }
+
+        /* ─── SECTION BASE ─── */
+        section { position: relative; }
+
+        .section-header {
+            margin-bottom: 64px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 4vw, 58px);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--espresso);
+            letter-spacing: -0.01em;
+            margin-top: 14px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--mist);
+            line-height: 1.75;
+            max-width: 420px;
+            margin-top: 16px;
+        }
+
+        /* ─── ABOUT ─── */
+        #about {
+            padding: 120px 0;
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+        .about-image-stack { position: relative; }
+
+        .about-img-main {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-img-accent {
+            position: absolute;
+            bottom: -32px;
+            right: -32px;
+            width: 52%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 8px solid var(--cream);
+        }
+
+        .about-badge {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            background: var(--espresso);
+            color: var(--sand);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .about-badge .year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 40px;
+            font-weight: 300;
+            line-height: 1;
+            display: block;
+        }
+
+        .about-badge .label {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-top: 4px;
+            display: block;
+        }
+
+        .about-text p {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--bark);
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+
+        .values-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .value-item {
+            padding: 20px;
+            border: 1px solid var(--parchment-dark);
+            border-left: 2px solid var(--gold);
+        }
+
+        .value-item h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--espresso);
+            margin-bottom: 6px;
+        }
+
+        .value-item p {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--mist);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ─── PORTFOLIO ─── */
+        #portfolio {
+            padding: 120px 0;
+            background: var(--parchment);
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 56px;
+        }
+
+        @media (max-width: 768px) { .portfolio-header { flex-direction: column; align-items: flex-start; gap: 24px; } }
+
+        .view-all {
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+            white-space: nowrap;
+            transition: opacity 0.3s;
+        }
+        .view-all:hover { opacity: 0.65; }
+
+        /* horizontal scroll rail */
+        .hotel-rail {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hotel-rail::-webkit-scrollbar { display: none; }
+
+        .hotel-card {
+            flex: 0 0 360px;
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) { .hotel-card { flex: 0 0 290px; } }
+
+        .hotel-card-img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .hotel-card:hover .hotel-card-img { transform: scale(1.04); }
+
+        .hotel-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(28, 16, 7, 0.8) 0%, transparent 55%);
+        }
+
+        .hotel-card-body {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 28px;
+        }
+
+        .hotel-card-tag {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            border: 1px solid rgba(184, 146, 74, 0.4);
+            padding: 4px 10px;
+            margin-bottom: 10px;
+        }
+
+        .hotel-card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--cream);
+            margin-bottom: 6px;
+        }
+
+        .hotel-card-loc {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(253, 250, 245, 0.6);
+            letter-spacing: 0.06em;
+        }
+
+        .hotel-card-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: gap 0.3s;
+        }
+        .hotel-card:hover .hotel-card-arrow { gap: 14px; }
+
+        /* ─── SERVICES ─── */
+        #services {
+            padding: 120px 0;
+            background: var(--espresso);
+        }
+
+        .services-eyebrow { color: var(--gold-light); }
+
+        .services-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 4vw, 58px);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--cream);
+            margin-top: 14px;
+            max-width: 560px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-top: 72px;
+            border: 1px solid rgba(212, 184, 150, 0.12);
+        }
+
+        @media (max-width: 700px) { .services-grid { grid-template-columns: 1fr; } }
+
+        .service-item {
+            padding: 48px 44px;
+            border-right: 1px solid rgba(212, 184, 150, 0.12);
+            border-bottom: 1px solid rgba(212, 184, 150, 0.12);
+            transition: background 0.35s;
+        }
+
+        .service-item:nth-child(even) { border-right: none; }
+
+        .service-item:hover { background: rgba(184, 146, 74, 0.06); }
+
+        .service-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: rgba(184, 146, 74, 0.2);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .service-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--sand);
+            margin-bottom: 12px;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(212, 184, 150, 0.65);
+            line-height: 1.75;
+        }
+
+        /* ─── CREDENTIALS / AWARDS ─── */
+        #credentials {
+            padding: 120px 0;
+            background: var(--cream);
+        }
+
+        .credentials-layout {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) { .credentials-layout { grid-template-columns: 1fr; gap: 56px; } }
+
+        .credentials-sticky { 
+            position: sticky; 
+            top: 120px; 
+        }
+
+        .credential-intro {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--mist);
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .award-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .award-item {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 24px;
+            align-items: start;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--parchment-dark);
+            transition: background 0.3s;
+        }
+
+        .award-item:first-child { padding-top: 0; }
+
+        .award-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            padding-top: 3px;
+        }
+
+        .award-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--espresso);
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .award-body {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--mist);
+            line-height: 1.6;
+        }
+
+        /* ─── STATS BAR ─── */
+        .stats-bar {
+            background: var(--parchment-dark);
+            padding: 52px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .stat-block {
+            text-align: center;
+            padding: 8px;
+            border-right: 1px solid rgba(184, 146, 74, 0.2);
+        }
+        .stat-block:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 52px;
+            font-weight: 300;
+            color: var(--espresso);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--mist);
+            margin-top: 8px;
+        }
+
+        /* ─── CONTACT / BOOK ─── */
+        #contact {
+            padding: 140px 0;
+            background: var(--parchment);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 56px; } }
+
+        .contact-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(40px, 5vw, 68px);
+            font-weight: 300;
+            line-height: 1.08;
+            color: var(--espresso);
+            letter-spacing: -0.01em;
+            margin: 14px 0 20px;
+        }
+
+        .contact-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .contact-desc {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--mist);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .contact-details {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--sand);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-detail-row {
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+        }
+
+        .contact-detail-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            min-width: 80px;
+        }
+
+        .contact-detail-val {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--bark);
+        }
+
+        /* Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+        .form-label {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--espresso);
+            background: var(--cream);
+            border: 1px solid var(--sand);
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color 0.25s;
+            width: 100%;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus { border-color: var(--gold); }
+
+        .form-textarea { min-height: 110px; resize: vertical; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .form-submit {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--espresso);
+            background: var(--gold);
+            border: none;
+            padding: 16px 40px;
+            cursor: pointer;
+            align-self: flex-start;
+            transition: background 0.3s, color 0.3s;
+        }
+        .form-submit:hover { background: var(--espresso); color: var(--gold); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--ink);
+            padding: 64px 0 40px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(212, 184, 150, 0.1);
+        }
+
+        @media (max-width: 768px) { .footer-top { flex-direction: column; gap: 40px; } }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--sand);
+            text-decoration: none;
+            display: block;
+        }
+
+        .footer-logo span {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 9px;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-top: 4px;
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(212, 184, 150, 0.45);
+            margin-top: 16px;
+            max-width: 260px;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 64px;
+        }
+
+        @media (max-width: 600px) { .footer-links { gap: 40px; } }
+
+        .footer-col h5 {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+        .footer-col a {
+            font-size: 13px;
+            font-weight: 300;
+            color: rgba(212, 184, 150, 0.55);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover { color: var(--sand); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            font-weight: 300;
+            color: rgba(212, 184, 150, 0.3);
+            letter-spacing: 0.04em;
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ NAV ═══════════════ -->
+    <nav id="main-nav">
+        <a href="#" class="nav-logo">
+            Bumikarsa Bidakara
+            <span>Hotels Management</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="nav-cta">Book a Call</a>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-grain"></div>
+
+        <div class="hero-content">
+            <p class="eyebrow hero-eyebrow">
+                <span class="ornament" style="margin-left:0"></span>
+                Hospitality Management · Est. 2000 · Jakarta
+            </p>
+
+            <h1 class="hero-title">
+                Where Indonesian<br />
+                warmth becomes<br />
+                <em>an institution</em>
+            </h1>
+
+            <p class="hero-sub">
+                A distinguished group managing ten properties across Indonesia — 
+                from flagship MICE venues to intimate retreats.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#portfolio" class="btn-primary">View Portfolio</a>
+                <a href="#contact" class="btn-ghost">Book a Discovery Call</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll">
+            <div class="scroll-line"></div>
+            Scroll
+        </div>
+    </section>
+
+    <!-- ═══════════════ STATS BAR ═══════════════ -->
+    <div class="stats-bar reveal">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-block">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">Properties</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-num">25</div>
+                    <div class="stat-label">Years Operating</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-num">3k</div>
+                    <div class="stat-label">Max Event Pax</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-num">5</div>
+                    <div class="stat-label">Cities</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ ABOUT / STORY ═══════════════ -->
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+
+                <!-- Image stack -->
+                <div class="about-image-stack reveal">
+                    <div class="about-badge">
+                        <span class="year">2000</span>
+                        <span class="label">Founded</span>
+                    </div>
+
+                    <img
+                        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80"
+                        alt="Hotel Bidakara Jakarta lobby"
+                        class="about-img-main"
+                    />
+
+                    <img
+                        src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&q=80"
+                        alt="Bumikarsa property detail"
+                        class="about-img-accent"
+                    />
+                </div>
+
+                <!-- Text -->
+                <div class="about-text">
+                    <p class="eyebrow reveal">Our Story</p>
+                    <h2 class="section-title reveal reveal-delay-1">
+                        A legacy built on<br />quiet excellence
+                    </h2>
+
+                    <div class="reveal reveal-delay-2">
+                        <p>
+                            Founded in 2000 and primarily owned by the Bank Indonesia 
+                            Employee Welfare Foundation (YKKBI), we began with the flagship 
+                            Hotel Bidakara Jakarta — and never stopped refining the art 
+                            of Indonesian hospitality.
+                        </p>
+                        <p>
+                            Today, Bumikarsa Bidakara Hotels Management is a full-service 
+                            hospitality partner: property management, HR solutions, 
+                            reservation systems, and a growing network of associate 
+                            properties from highland retreats to urban galleries.
+                        </p>
+                    </div>
+
+                    <div class="values-row reveal reveal-delay-3">
+                        <div class="value-item">
+                            <h4>Our Vision</h4>
+                            <p>To be the most trusted & excellent professional in Indonesian hospitality management.</p>
+                        </div>
+                        <div class="value-item">
+                            <h4>Our Mission</h4>
+                            <p>Delivering consultant services through sustainable, optimal performance — always people-first.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ HOTEL PORTFOLIO ═══════════════ -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="portfolio-header">
+                <div class="reveal">
+                    <p class="eyebrow">Hotel Portfolio</p>
+                    <h2 class="section-title">Ten properties.<br />One standard.</h2>
+                </div>
+                <a href="#contact" class="view-all reveal">Enquire About a Property →</a>
+            </div>
+        </div>
+
+        <!-- Full-width rail -->
+        <div class="hotel-rail" style="padding: 0 40px;" id="hotel-rail">
+
+            <div class="hotel-card reveal">
+                <img
+                    class="hotel-card-img"
+                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=700&q=75"
+                    alt="Hotel Bidakara Jakarta"
+                />
+                <div class="hotel-card-overlay"></div>
+                <div class="hotel-card-body">
+                    <div class="hotel-card-tag">Flagship · 4-Star</div>
+                    <div class="hotel-card-name">Hotel Bidakara<br />Jakarta</div>
+                    <div class="hotel-card-loc">Pancoran, South Jakarta</div>
+                    <a href="#contact" class="hotel-card-arrow">
+                        Explore
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hotel-card reveal reveal-delay-1">
+                <img
+                    class="hotel-card-img"
+                    src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=700&q=75"
+                    alt="Sangga Buana Resort"
+                />
+                <div class="hotel-card-overlay"></div>
+                <div class="hotel-card-body">
+                    <div class="hotel-card-tag">Resort & Convention</div>
+                    <div class="hotel-card-name">Hotel Sangga Buana<br />Resort</div>
+                    <div class="hotel-card-loc">Cipanas, Cianjur Highlands</div>
+                    <a href="#contact" class="hotel-card-arrow">
+                        Explore
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hotel-card reveal reveal-delay-2">
+                <img
+                    class="hotel-card-img"
+                    src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&q=75"
+                    alt="Green Wattana Sentul"
+                />
+                <div class="hotel-card-overlay"></div>
+                <div class="hotel-card-body">
+                    <div class="hotel-card-tag">Eco Hotel</div>
+                    <div class="hotel-card-name">Hotel Green<br />Wattana Sentul</div>
+                    <div class="hotel-card-loc">Sentul, Bogor</div>
+                    <a href="#contact" class="hotel-card-arrow">
+                        Explore
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hotel-card reveal reveal-delay-3">
+                <img
+                    class="hotel-card-img"
+                    src="https://images.unsplash.com/photo-1551882547-ff40c4a49ce8?w=700&q=75"
+                    alt="Hotel Fafa Hills"
+                />
+                <div class="hotel-card-overlay"></div>
+                <div class="hotel-card-body">
+                    <div class="hotel-card-tag">Hilltop Retreat</div>
+                    <div class="hotel-card-name">Hotel Fafa Hills<br />&nbsp;</div>
+                    <div class="hotel-card-loc">Gunung Geulis, Bogor</div>
+                    <a href="#contact" class="hotel-card-arrow">
+                        Explore
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hotel-card reveal reveal-delay-3">
+                <img
+                    class="hotel-card-img"
+                    src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=700&q=75"
+                    alt="Wakayapa Syariah Residence"
+                />
+                <div class="hotel-card-overlay"></div>
+                <div class="hotel-card-body">
+                    <div class="hotel-card-tag">Syariah Certified</div>
+                    <div class="hotel-card-name">WAKAYAPA Syariah<br />Residence</div>
+                    <div class="hotel-card-loc">Tangerang</div>
+                    <a href="#contact" class="hotel-card-arrow">
+                        Explore
+                        <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                            <path d="M1 5h14M10 1l5 4-5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════ SERVICES ═══════════════ -->
+    <section id="services">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow services-eyebrow">What We Offer</p>
+                <h2 class="services-title">
+                    Complete hospitality<br />expertise, under one roof
+                </h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-item reveal">
+                    <div class="service-num">01</div>
+                    <div class="service-name">Property Management</div>
+                    <p class="service-desc">
+                        Full operational oversight — from front-of-house to back-office. 
+                        We manage properties as if they were our own flagship.
+                    </p>
+                </div>
+
+                <div class="service-item reveal reveal-delay-1">
+                    <div class="service-num">02</div>
+                    <div class="service-name">MICE & Events</div>
+                    <p class="service-desc">
+                        Meetings, incentives, conferences, and exhibitions — 
+                        up to 3,000 pax. End-to-end production with a dedicated events team.
+                    </p>
+                </div>
+
+                <div class="service-item reveal reveal-delay-2">
+                    <div class="service-num">03</div>
+                    <div class="service-name">HR & Training</div>
+                    <p class="service-desc">
+                        Hospitality-specific HR consulting, talent development, 
+                        and professional training programs aligned with industry standards.
+                    </p>
+                </div>
+
+                <div class="service-item reveal reveal-delay-3">
+                    <div class="service-num">04</div>
+                    <div class="service-name">Reservation Systems</div>
+                    <p class="service-desc">
+                        Centralised booking infrastructure, channel management, 
+                        and revenue optimisation for individual and group travel.
+                    </p>
+                </div>
+
+                <div class="service-item reveal">
+                    <div class="service-num">05</div>
+                    <div class="service-name">Wedding & Social</div>
+                    <p class="service-desc">
+                        Intimate ceremonies to grand receptions — full planning, 
+                        catering curation, décor, and guest accommodation coordination.
+                    </p>
+                </div>
+
+                <div class="service-item reveal reveal-delay-1">
+                    <div class="service-num">06</div>
+                    <div class="service-name">Associate Partnerships</div>
+                    <p class="service-desc">
+                        A growing network of partner properties — Bisanta Surabaya, 
+                        Fabu Bandung, and beyond — managed to our group standard.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CREDENTIALS ═══════════════ -->
+    <section id="credentials">
+        <div class="container">
+            <div class="credentials-layout">
+
+                <!-- Left sticky -->
+                <div class="credentials-sticky reveal">
+                    <p class="eyebrow">Awards & Recognition</p>
+                    <h2 class="section-title">
+                        Measured by<br />consistent results
+                    </h2>
+                    <p class="credential-intro">
+                        Over two decades, Bumikarsa Bidakara has earned recognition 
+                        not through volume — but through the quality of experience 
+                        delivered at every touchpoint.
+                    </p>
+                </div>
+
+                <!-- Award list -->
+                <div class="award-list">
+                    <div class="award-item reveal">
+                        <div class="award-year">2024</div>
+                        <div>
+                            <div class="award-name">Best MICE Hotel — South Jakarta</div>
+                            <p class="award-body">Recognised for Birawa Assembly Hall's world-class configuration and dedicated event execution team. 3,000-pax capacity with full AV & tech infrastructure.</p>
+                        </div>
+                    </div>
+
+                    <div class="award-item reveal reveal-delay-1">
+                        <div class="award-year">2023</div>
+                        <div>
+                            <div class="award-name">Indonesia's Most Trusted Hospitality Manager</div>
+                            <p class="award-body">Awarded by the Indonesian Hotel & Restaurant Association for excellence in property operations, guest satisfaction, and staff welfare standards.</p>
+                        </div>
+                    </div>
+
+                    <div class="award-item reveal reveal-delay-2">
+                        <div class="award-year">2023</div>
+                        <div>
+                            <div class="award-name">Green Hospitality Certification</div>
+                            <p class="award-body">Hotel Green Wattana Sentul received Environment Certification for its integration of eco-practices across operations, energy, and waste management.</p>
+                        </div>
+                    </div>
+
+                    <div class="award-item reveal reveal-delay-3">
+                        <div class="award-year">2022</div>
+                        <div>
+                            <div class="award-name">Best Wedding Venue — Jakarta</div>
+                            <p class="award-body">For the fourth consecutive year, Bidakara Jakarta's Birawa Hall was voted the preferred grand wedding venue in the Greater Jakarta region.</p>
+                        </div>
+                    </div>
+
+                    <div class="award-item reveal">
+                        <div class="award-year">2020</div>
+                        <div>
+                            <div class="award-name">20-Year Legacy Award — YKKBI Foundation</div>
+                            <p class="award-body">Commemorating two decades of trusted management, recognising our commitment to the welfare and professional growth of Bank Indonesia pensioners.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT / BOOK ═══════════════ -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Left -->
+                <div>
+                    <p class="eyebrow reveal">Get in Touch</p>
+                    <h2 class="contact-title reveal reveal-delay-1">
+                        Let's start a<br />
+                        <em>conversation</em>
+                    </h2>
+                    <p class="contact-desc reveal reveal-delay-2">
+                        Whether you're planning a conference for 2,000, a wedding 
+                        for 300, or considering a management partnership — our team 
+                        responds within one business day.
+                    </p>
+
+                    <a href="tel:+622179394500" class="btn-primary reveal reveal-delay-3">
+                        Book a Discovery Call
+                    </a>
+
+                    <div class="contact-details reveal">
+                        <div class="contact-detail-row">
+                            <span class="contact-detail-label">Address</span>
+                            <span class="contact-detail-val">Jl. Jend. Gatot Subroto Kav. 71–73, Pancoran, Jakarta Selatan</span>
+                        </div>
+                        <div class="contact-detail-row">
+                            <span class="contact-detail-label">Phone</span>
+                            <span class="contact-detail-val">(021) 7939 4500</span>
+                        </div>
+                        <div class="contact-detail-row">
+                            <span class="contact-detail-label">Email</span>
+                            <span class="contact-detail-val">info@bidakara.com</span>
+                        </div>
+                        <div class="contact-detail-row">
+                            <span class="contact-detail-label">Hours</span>
+                            <span class="contact-detail-val">Mon – Fri, 08:00 – 17:00 WIB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form class="contact-form reveal reveal-delay-2" onsubmit="return false;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" placeholder="Anindya" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" placeholder="Rahayu" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="you@company.com" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">I'm interested in</label>
+                        <select class="form-select">
+                            <option value="">Select a service</option>
+                            <option>MICE / Conference</option>
+                            <option>Wedding & Social Event</option>
+                            <option>Hotel Stay</option>
+                            <option>Property Management Partnership</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-textarea" placeholder="Tell us about your event, timeline, or management inquiry…"></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Send Enquiry →</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <a href="#" class="footer-logo">
+                        Bumikarsa Bidakara
+                        <span>Hotels Management</span>
+                    </a>
+                    <p class="footer-tagline">
+                        Refined Indonesian hospitality, thoughtfully managed since 2000.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h5>Explore</h5>
+                        <ul>
+                            <li><a href="#about">Our Story</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#credentials">Credentials</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Whistleblowing</a></li>
+                            <li><a href="#">BMC Member Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copy">© 2026 Bumikarsa Bidakara Hotels Management. All rights reserved.</p>
+                <p class="footer-copy" style="opacity:0.4;">V5.0 · Warm Earthy Edition</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Sticky nav scroll
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+
+        // ── Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

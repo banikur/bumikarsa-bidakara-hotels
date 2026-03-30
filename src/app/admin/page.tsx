@@ -51,13 +51,10 @@ export default async function AdminPage() {
   }
 
   // Fetch the configuration
-  const { data, error } = await insforge.database
-    .from("site_config")
-    .select("*")
-    .limit(1)
-    .single();
+  const { getSiteConfig } = await import("@/lib/get-site-config");
+  const config = await getSiteConfig();
 
-  if (error || !data) {
+  if (!config) {
     return (
       <main className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
         <p>Error loading site configuration. Please run the seed script.</p>
@@ -68,7 +65,7 @@ export default async function AdminPage() {
   // Render Admin Panel
   return (
     <main className="fixed inset-0 z-[100] flex flex-col bg-background text-foreground overflow-hidden">
-      <AdminPanel initialConfig={data} />
+      <AdminPanel initialConfig={config} />
     </main>
   );
 }

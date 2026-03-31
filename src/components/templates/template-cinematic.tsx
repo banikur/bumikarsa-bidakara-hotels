@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { UniversalContent } from "@/types/cms.types";
+import { SectionAnchor } from "@/components/layout/section-anchor";
 
 export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -39,33 +40,10 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       <div className="cin-noise" />
       <div className="cin-loading" />
 
-      {/* NAVBAR */}
-      <nav style={{ position: "fixed", top: 0, width: "100%", zIndex: 50 }} className="cin-glass-nav">
-        <div style={{ maxWidth: 1400, margin: "0 auto", padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 48 }}>
-            <a href="#destinations" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(245,240,232,0.7)", textDecoration: "none", transition: "color 0.4s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF77")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,240,232,0.7)")}>
-              Destinations
-            </a>
-            <a href="#experiences" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(245,240,232,0.7)", textDecoration: "none", transition: "color 0.4s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF77")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,240,232,0.7)")}>
-              Experiences
-            </a>
-          </div>
-
-          <a href="#" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none" }}>
-            <span className="cin-serif cin-gold-text" style={{ fontSize: 28, fontWeight: 500, letterSpacing: "0.05em" }}>BUMIKARSA</span>
-            <span style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(212,175,119,0.8)", marginTop: 4 }}>Hotels &amp; Resorts</span>
-          </a>
-
-          <a href="#reserve" className="cin-btn" style={{ padding: "10px 32px", fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", textDecoration: "none", zIndex: 10, display: "inline-block" }}>
-            Reserve
-          </a>
-        </div>
-      </nav>
+      {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
 
       {/* HERO */}
-      <header style={{ position: "relative", height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+      <header id="about" style={{ position: "relative", height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img src={copy.hero.background_image_url || "https://images.unsplash.com/photo-1499591934245-40b55745b905?q=80&w=2000&auto=format&fit=crop"}
             alt="Luxury Hotel" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", transform: "scale(1.05)" }} />
@@ -110,6 +88,7 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       </header>
 
       {/* PORTFOLIO HORIZONTAL SCROLL */}
+      <SectionAnchor id="properties" />
       <section id="destinations" style={{ padding: "128px 0", background: "#0a0a0f", borderBottom: "1px solid #1a1c23", overflow: "hidden" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 48px 64px", display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 24 }}>
           <div>
@@ -139,6 +118,9 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* EXPERIENCES GRID */}
+      <SectionAnchor id="services" />
+      <SectionAnchor id="meetings" />
+      <SectionAnchor id="weddings" />
       <section id="experiences" style={{ padding: "128px 0", background: "linear-gradient(to bottom, #0a0a0f 0%, #1a1c23 100%)", position: "relative" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ textAlign: "center", marginBottom: 80 }}>
@@ -192,7 +174,7 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* SIGNATURE COLLECTIONS / OFFERS */}
-      <section style={{ padding: "128px 0", background: "#0F1115" }}>
+      <section id="offers" style={{ padding: "128px 0", background: "#0F1115" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 64, gap: 24 }}>
             <div>
@@ -245,6 +227,7 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* CONTACT */}
+      <SectionAnchor id="whistleblowing" />
       <section id="contact" style={{ padding: "128px 0", background: "#110e0a", borderTop: "1px solid rgba(212,175,119,0.2)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 48px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 96, alignItems: "start" }}>

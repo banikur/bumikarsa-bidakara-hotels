@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { UniversalContent } from "@/types/cms.types";
+import { SectionAnchor } from "@/components/layout/section-anchor";
 
 const VENUES = [
   { name: "Birawa Assembly Hall", desc: "Column-free Grand Ballroom, Ground Floor", area: "2,025", theatre: "3,000", classroom: "1,500", banquet: "1,200" },
@@ -44,30 +45,15 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
         .mice-card:hover img { filter:grayscale(0%); }
       `}</style>
 
-      {/* NAVBAR */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "white", borderBottom: "1px solid #e5e7eb" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: 80 }}>
-            <Link href="/" style={{ display: "flex", flexDirection: "column", textDecoration: "none" }}>
-              <span className="mice-heading" style={{ fontWeight: 700, color: "#0A192F", fontSize: 20, lineHeight: 1 }}>BUMIKARSA</span>
-              <span style={{ color: "#C9A96E", fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 4 }}>Hotels Management</span>
-            </Link>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-              {[{ href: "#venues", label: "Venues" }, { href: "#properties", label: "Properties" }, { href: "#why-us", label: "Why Us" }].map(l => (
-                <a key={l.href} href={l.href} style={{ fontSize: 14, fontWeight: 500, color: "#4B5563", textDecoration: "none", transition: "color 0.3s" }}
-                  onMouseEnter={e => e.currentTarget.style.color = "#0A192F"} onMouseLeave={e => e.currentTarget.style.color = "#4B5563"}>
-                  {l.label}
-                </a>
-              ))}
-              <div style={{ height: 16, width: 1, background: "#d1d5db" }} />
-              <a href="#contact" className="mice-btn" style={{ padding: "10px 24px", fontSize: 14, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                Book Meeting
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
+      <SectionAnchor id="about" />
+      <SectionAnchor id="properties" />
+      <SectionAnchor id="offers" />
+      <SectionAnchor id="services" />
+      <SectionAnchor id="meetings" />
+      <SectionAnchor id="weddings" />
+      <SectionAnchor id="membership" />
+      <SectionAnchor id="whistleblowing" />
 
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "85vh", display: "flex", alignItems: "center" }}>
@@ -131,7 +117,8 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* VENUE SPECS TABLE */}
-      <section id="venues" style={{ padding: "192px 32px 96px" }}>
+      <section id="meetings" style={{ padding: "192px 32px 96px" }}>
+      <div id="weddings" />
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, borderBottom: "1px solid #e5e7eb", paddingBottom: 24, gap: 24 }}>
             <div>
@@ -187,7 +174,7 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* PROPERTIES */}
-      <section id="properties" style={{ padding: "96px 32px", background: "white", borderTop: "1px solid #f0f0f0" }}>
+      <section id="offers" style={{ padding: "96px 32px", background: "white", borderTop: "1px solid #f0f0f0" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
             <h2 className="mice-heading" style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 700, color: "#0A192F", marginBottom: 16 }}>Strategic Business Locations</h2>
@@ -258,6 +245,7 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
               </form>
             </div>
           </div>
+      <div id="whistleblowing" />
           <div style={{ borderTop: "1px solid #d1d5db", paddingTop: 32, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16, fontSize: 12, color: "#9ca3af" }}>
             <p>© 2026 Bumikarsa Bidakara Hotels Management. All rights reserved.</p>
             <div style={{ display: "flex", gap: 16 }}>

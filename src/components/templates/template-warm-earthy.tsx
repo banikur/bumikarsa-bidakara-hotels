@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { UniversalContent } from "@/types/cms.types";
+import { Section, SectionAnchor } from "@/components/layout/section-anchor";
 
 export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
   const navRef = useRef<HTMLElement>(null);
@@ -40,22 +41,10 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
         .scroll-line::after{content:'';position:absolute;top:0;left:-40px;width:40px;height:1px;background:var(--gold);animation:scrollLine 2s ease-in-out infinite;}
       `}</style>
 
-      {/* NAV */}
-      <nav ref={navRef} className="we-nav">
-        <a href="#" className="we-logo">
-          Bumikarsa Bidakara
-          <span>Hotels Management</span>
-        </a>
-        <ul className="we-nav-links" style={{ display: "flex" }}>
-          <li><a href="#portfolio">Hotels</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#contact" className="we-cta">Reserve</a>
-      </nav>
+      {/* NAV handled globally in app/layout with Navbar (keep header consistent across templates) */}
 
       {/* HERO */}
-      <section id="hero" style={{ position: "relative", height: "100vh", minHeight: 700, display: "flex", alignItems: "flex-end", overflow: "hidden" }}>
+      <Section id="about" style={{ position: "relative", height: "100vh", minHeight: 700, display: "flex", alignItems: "flex-end", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${copy.hero.background_image_url || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800&q=80"}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(28,16,7,0.82) 0%, rgba(28,16,7,0.45) 45%, rgba(28,16,7,0.12) 100%)" }} />
         <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E\")", backgroundSize: "200px 200px", pointerEvents: "none" }} />
@@ -75,7 +64,7 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
             {copy.hero.subtitle || copy.hero.description}
           </p>
           <div style={{ display: "flex", gap: 20, alignItems: "center", flexWrap: "wrap" }}>
-            <a href="#portfolio" className="we-cta">{copy.hero.cta_primary || "Explore Hotels"}</a>
+            <a href="#properties" className="we-cta">{copy.hero.cta_primary || "Explore Hotels"}</a>
             <a href="#contact" style={{ fontSize: 11, fontWeight: 400, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(253,250,245,0.7)", textDecoration: "none", borderBottom: "1px solid rgba(184,146,74,0.4)", paddingBottom: 2, transition: "color 0.3s, border-color 0.3s" }}>
               {copy.hero.cta_secondary || "Contact Us"}
             </a>
@@ -86,10 +75,10 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
           <span className="scroll-line" />
           Scroll
         </div>
-      </section>
+      </Section>
 
-      {/* HOTELS / PORTFOLIO */}
-      <section id="portfolio" style={{ padding: "120px 0", background: "var(--parchment)" }}>
+      {/* HOTELS / PROPERTIES */}
+      <Section id="properties" style={{ padding: "120px 0", background: "var(--parchment)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 56 }}>
             <div>
@@ -127,10 +116,12 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* EXPERIENCES / SERVICES */}
-      <section id="services" style={{ padding: "120px 0", background: "var(--espresso)" }}>
+      <SectionAnchor id="services" />
+      <SectionAnchor id="weddings" />
+      <Section id="meetings" style={{ padding: "120px 0", background: "var(--espresso)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
           <p className="eyebrow" style={{ color: "var(--gold-light)" }}>Experiences</p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 58px)", fontWeight: 300, lineHeight: 1.1, color: "var(--cream)", marginTop: 14, maxWidth: 560 }}>
@@ -155,7 +146,7 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* OFFERS */}
-      <section style={{ padding: "120px 0", background: "var(--cream)" }}>
+      <section id="offers" style={{ padding: "120px 0", background: "var(--cream)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
           <p className="eyebrow">Exclusives</p>
           <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(36px, 4vw, 58px)", fontWeight: 400, lineHeight: 1.1, color: "var(--espresso)", marginTop: 14, marginBottom: 56 }}>
@@ -177,7 +168,7 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* MEMBERSHIP */}
-      <section style={{ padding: "120px 0", background: "var(--parchment-dark)" }}>
+      <section id="membership" style={{ padding: "120px 0", background: "var(--parchment-dark)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
             <div>
@@ -212,7 +203,8 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ padding: "140px 0", background: "var(--parchment)" }}>
+      <SectionAnchor id="whistleblowing" />
+      <Section id="contact" style={{ padding: "140px 0", background: "var(--parchment)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 100, alignItems: "center" }}>
             <div>

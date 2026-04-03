@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { UniversalContent } from "@/types/cms.types";
+import { SectionAnchor } from "@/components/layout/section-anchor";
 
 type Tier = "silver" | "gold" | "platinum";
 
@@ -73,6 +74,25 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
         .mem-badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 10px; border-radius:9999px; }
       `}</style>
 
+<<<<<<< HEAD
+=======
+      {/* TOP BAR */}
+      <SectionAnchor id="about" />
+      <SectionAnchor id="services" />
+      <SectionAnchor id="meetings" />
+      <SectionAnchor id="weddings" />
+      <div style={{ background: "#0A192F", color: "#FDFBF7", fontSize: 12, padding: "6px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Link href="/" style={{ opacity: 0.7, display: "flex", alignItems: "center", gap: 6, textDecoration: "none", color: "inherit", transition: "opacity 0.3s" }}>
+          ← Back to Main Site
+        </Link>
+        <span style={{ color: "#C9A96E", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", fontSize: 10 }}>
+          Bidakara Members Club (BMC)
+        </span>
+      </div>
+
+      {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
+
+>>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <section style={{ background: "linear-gradient(135deg, #0A192F 60%, #1a3358)", position: "relative", overflow: "hidden", padding: "80px 16px 112px" }}>
         {copy.hero.background_image_url && (
@@ -124,7 +144,7 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* BENEFITS */}
-      <section id="benefits" style={{ background: "#F5EDD8", padding: "64px 16px" }}>
+      <section id="meetings" style={{ background: "#F5EDD8", padding: "64px 16px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <p style={{ color: "#C9A96E", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 4 }}>Why Join BMC</p>
@@ -146,7 +166,7 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* MEMBERSHIP TIERS */}
-      <section id="tiers" style={{ padding: "80px 16px", background: "white" }}>
+      <section id="membership" style={{ padding: "80px 16px", background: "white" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <p style={{ color: "#C9A96E", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 4 }}>Membership Tiers</p>
@@ -222,7 +242,7 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* SIGN UP / CONTACT */}
-      <section id="signup" style={{ padding: "80px 16px", background: "linear-gradient(135deg, #C9A96E 0%, #e8c98a 40%, #C9A96E 100%)" }}>
+      <section id="membership" style={{ padding: "80px 16px", background: "linear-gradient(135deg, #C9A96E 0%, #e8c98a 40%, #C9A96E 100%)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
           <div style={{ width: 64, height: 64, background: "rgba(10,25,47,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0A192F" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -249,6 +269,7 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* FOOTER */}
+      <SectionAnchor id="whistleblowing" />
       <footer style={{ background: "#071120", color: "#9ca3af", padding: "40px 16px" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
           <div>

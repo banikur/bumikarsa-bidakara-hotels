@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { UniversalContent } from "@/types/cms.types";
+import { SectionAnchor } from "@/components/layout/section-anchor";
 
 const VENUES = [
   { name: "Birawa Assembly Hall", desc: "Column-free Grand Ballroom, Ground Floor", area: "2,025", theatre: "3,000", classroom: "1,500", banquet: "1,200" },
@@ -44,6 +45,19 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
         .mice-card:hover img { filter:grayscale(0%); }
       `}</style>
 
+<<<<<<< HEAD
+=======
+      {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
+      <SectionAnchor id="about" />
+      <SectionAnchor id="properties" />
+      <SectionAnchor id="offers" />
+      <SectionAnchor id="services" />
+      <SectionAnchor id="meetings" />
+      <SectionAnchor id="weddings" />
+      <SectionAnchor id="membership" />
+      <SectionAnchor id="whistleblowing" />
+
+>>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "85vh", display: "flex", alignItems: "center" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
@@ -106,7 +120,8 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* VENUE SPECS TABLE */}
-      <section id="venues" style={{ padding: "192px 32px 96px" }}>
+      <section id="meetings" style={{ padding: "192px 32px 96px" }}>
+      <div id="weddings" />
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, borderBottom: "1px solid #e5e7eb", paddingBottom: 24, gap: 24 }}>
             <div>
@@ -162,7 +177,7 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
       </section>
 
       {/* PROPERTIES */}
-      <section id="properties" style={{ padding: "96px 32px", background: "white", borderTop: "1px solid #f0f0f0" }}>
+      <section id="offers" style={{ padding: "96px 32px", background: "white", borderTop: "1px solid #f0f0f0" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 64 }}>
             <h2 className="mice-heading" style={{ fontSize: "clamp(24px, 4vw, 36px)", fontWeight: 700, color: "#0A192F", marginBottom: 16 }}>Strategic Business Locations</h2>
@@ -233,6 +248,7 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
               </form>
             </div>
           </div>
+      <div id="whistleblowing" />
           <div style={{ borderTop: "1px solid #d1d5db", paddingTop: 32, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16, fontSize: 12, color: "#9ca3af" }}>
             <p>© 2026 Bumikarsa Bidakara Hotels Management. All rights reserved.</p>
             <div style={{ display: "flex", gap: 16 }}>

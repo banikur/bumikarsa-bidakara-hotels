@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { UniversalContent } from "@/types/cms.types";
 
@@ -32,10 +31,10 @@ const TIERS: Record<Tier, { label: string; color: string; textColor: string; pri
 
 export function TemplateMembership({ copy }: { copy: UniversalContent }) {
   const [activeTier, setActiveTier] = useState<Tier>("silver");
-  
+
   // Try to use CMS tiers if available, otherwise fallback to local hardcoded
-  const dynamicTiers = copy.membership?.tiers && copy.membership.tiers.length >= 3 
-    ? copy.membership.tiers 
+  const dynamicTiers = copy.membership?.tiers && copy.membership.tiers.length >= 3
+    ? copy.membership.tiers
     : [
         { name: TIERS.silver.label, benefits: TIERS.silver.benefits },
         { name: TIERS.gold.label, benefits: TIERS.gold.benefits },
@@ -74,35 +73,6 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
         .mem-badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 10px; border-radius:9999px; }
       `}</style>
 
-      {/* TOP BAR */}
-      <div style={{ background: "#0A192F", color: "#FDFBF7", fontSize: 12, padding: "6px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Link href="/" style={{ opacity: 0.7, display: "flex", alignItems: "center", gap: 6, textDecoration: "none", color: "inherit", transition: "opacity 0.3s" }}>
-          ← Back to Main Site
-        </Link>
-        <span style={{ color: "#C9A96E", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", fontSize: 10 }}>
-          Bidakara Members Club (BMC)
-        </span>
-      </div>
-
-      {/* NAVBAR */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(255,255,255,0.95)", backdropFilter: "blur(12px)", boxShadow: "0 1px 8px rgba(0,0,0,0.05)", borderBottom: "1px solid #f0f0f0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
-          <Link href="/" style={{ display: "flex", flexDirection: "column", textDecoration: "none", lineHeight: 1.3 }}>
-            <span className="mem-heading" style={{ fontWeight: 700, color: "#0A192F", fontSize: 16 }}>Bumikarsa Bidakara</span>
-            <span style={{ color: "#C9A96E", fontSize: 10, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" }}>Hotels Management</span>
-          </Link>
-          <nav style={{ display: "flex", gap: 24, alignItems: "center" }}>
-            {["#benefits", "#tiers", "#signup"].map((href, i) => (
-              <a key={href} href={href} style={{ color: "#4B5563", fontSize: 14, fontWeight: 500, textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => e.currentTarget.style.color = "#0A192F"} onMouseLeave={e => e.currentTarget.style.color = "#4B5563"}>
-                {["Benefits", "Tiers", "Join"][i]}
-              </a>
-            ))}
-            <a href="#signup" className="mem-btn-gold" style={{ padding: "8px 20px", borderRadius: 9999, fontWeight: 700, fontSize: 14 }}>Sign Up BMC Now</a>
-          </nav>
-        </div>
-      </nav>
-
       {/* HERO */}
       <section style={{ background: "linear-gradient(135deg, #0A192F 60%, #1a3358)", position: "relative", overflow: "hidden", padding: "80px 16px 112px" }}>
         {copy.hero.background_image_url && (
@@ -118,8 +88,16 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
           </div>
 
           <h1 className="mem-heading" style={{ fontWeight: 800, color: "white", fontSize: "clamp(36px, 6vw, 64px)", lineHeight: 1.15, marginBottom: 20 }}>
-            {copy.membership?.headline.split(" ")[0] || "Elevator"}<br />
-            <span style={{ color: "#C9A96E" }}>{copy.membership?.headline.split(" ").slice(1).join(" ") || "Your Lifestyle"}</span>
+            {(() => {
+              const words = (copy.membership?.headline || "").split(" ").filter(Boolean);
+              const mid = Math.ceil(words.length / 2) || 2;
+              return (
+                <>
+                  {words.slice(0, mid).join(" ") || "Elevate"}<br />
+                  <span style={{ color: "#C9A96E" }}>{words.slice(mid).join(" ") || "Your Lifestyle"}</span>
+                </>
+              );
+            })()}
           </h1>
           <p style={{ color: "#d1d5db", fontSize: 18, maxWidth: 600, margin: "0 auto 40px", lineHeight: 1.7 }}>
             {copy.membership?.description}

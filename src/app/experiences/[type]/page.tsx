@@ -1,121 +1,78 @@
-"use client";
-
-import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/container";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { AnimatedReveal } from "@/components/motion/animated-reveal";
-import { useLocale } from "@/contexts/locale-context";
-import { getExperienceById } from "@/content/selectors";
-import type { ExperienceType } from "@/components/cards/experience-card";
-import { BookingBar } from "@/components/booking/booking-bar";
+import { TemplatePageLayout } from "@/components/templates";
+import { getActiveTemplateId } from "@/lib/get-active-template";
+import { getSiteConfig } from "@/lib/get-site-config";
 
 type ExperienceDetailPageProps = {
-  params: { type: ExperienceType };
+  params: { type: string };
 };
 
-export default function ExperienceDetailPage({
-  params,
-}: ExperienceDetailPageProps) {
-  const { locale } = useLocale();
-  const experience = getExperienceById(locale, params.type);
+export default async function ExperienceDetailPage({ params }: ExperienceDetailPageProps) {
+  const [templateId, config] = await Promise.all([
+    getActiveTemplateId(),
+    getSiteConfig(),
+  ]);
+
+  const features = config.content_id.features;
+  const experience = features.find(f => f.id === params.type);
 
   if (!experience) {
-    notFound();
+    return (
+      <TemplatePageLayout templateId={templateId}>
+        <Container as="main" className="pb-24 pt-32">
+          <p className="text-sm opacity-60">
+            Experience not found. Please return to the experiences overview.
+          </p>
+        </Container>
+      </TemplatePageLayout>
+    );
   }
 
   return (
-    <Container
-      as="main"
-      className="flex flex-col gap-20 pb-24 pt-28 lg:gap-24 lg:pt-32"
-    >
-      <PageSection aria-labelledby="experience-hero">
-        <SectionHeading
-          eyebrow={locale === "id" ? "Experiences" : "Experiences"}
-          title={
-            <span id="experience-hero" className="inline-block">
+    <TemplatePageLayout templateId={templateId}>
+      <Container
+        as="main"
+        className="flex flex-col gap-20 pb-24 pt-28 lg:gap-24 lg:pt-32"
+      >
+        <PageSection aria-labelledby="experience-hero">
+          <div className="max-w-3xl space-y-6">
+            <p className="text-[10px] uppercase tracking-[0.28em] opacity-50">
+              Experiences
+            </p>
+            <h1
+              id="experience-hero"
+              className="text-3xl leading-tight tracking-tight md:text-4xl lg:text-5xl"
+            >
               {experience.title}
-            </span>
-          }
-        />
-        <AnimatedReveal delay={0.12}>
-          <p className="max-w-2xl text-sm text-zinc-300 md:text-base md:leading-relaxed">
-            {experience.description}
-          </p>
-        </AnimatedReveal>
-      </PageSection>
+            </h1>
+            <AnimatedReveal delay={0.14}>
+              <p className="max-w-2xl text-sm md:text-base md:leading-relaxed opacity-70">
+                {experience.description}
+              </p>
+            </AnimatedReveal>
+          </div>
+        </PageSection>
 
-      <PageSection aria-labelledby="experience-sections">
-        <SectionHeading
-          eyebrow={locale === "id" ? "Overview" : "Overview"}
-          title={
-            <span id="experience-sections" className="inline-block">
-              {locale === "id"
-                ? "Dirangkai Seperti Sebuah Alur Acara"
-                : "Composed Like a Carefully Scored Program"}
-            </span>
-          }
-        />
-        <div className="grid gap-4 md:grid-cols-3 text-xs text-zinc-300">
-          <div className="rounded-2xl border border-border-subtle/70 bg-black/55 p-4">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-zinc-500">
-              {locale === "id" ? "Pra-Acara" : "Pre-Event"}
+        <PageSection aria-labelledby="experience-details">
+          <SectionHeading
+            eyebrow="Details"
+            title={`About ${experience.title}`}
+          />
+          <div className="max-w-3xl space-y-4 text-sm opacity-70">
+            <p>
+              Experience the finest {experience.title.toLowerCase()} at Bumikarsa Bidakara Hotels. 
+              Our dedicated team ensures every detail is crafted to exceed expectations.
             </p>
-            <p className="mt-2 leading-relaxed">
-              {locale === "id"
-                ? "Tim kami membantu menyusun alur, layout, dan kebutuhan teknis sejak sesi perencanaan awal."
-                : "Our specialists help choreograph flow, layout, and technical needs from the very first planning call."}
+            <p>
+              Contact our central reservations team to learn more about availability, 
+              pricing, and bespoke arrangements for your event.
             </p>
           </div>
-          <div className="rounded-2xl border border-border-subtle/70 bg-black/55 p-4">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-zinc-500">
-              {locale === "id" ? "Hari-H" : "Event Day"}
-            </p>
-            <p className="mt-2 leading-relaxed">
-              {locale === "id"
-                ? "Tim on-ground yang tenang dan responsif memastikan setiap momen berjalan mulus."
-                : "A calm, responsive on-ground team ensures each moment unfolds with precision."}
-            </p>
-          </div>
-          <div className="rounded-2xl border border-border-subtle/70 bg-black/55 p-4">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-zinc-500">
-              {locale === "id" ? "Pasca-Acara" : "Post-Event"}
-            </p>
-            <p className="mt-2 leading-relaxed">
-              {locale === "id"
-                ? "Ringkasan dan evaluasi pasca-acara untuk memastikan kemitraan jangka panjang."
-                : "Post-event summaries and reflections designed for long-term partnership."}
-            </p>
-          </div>
-        </div>
-      </PageSection>
-
-      <PageSection aria-labelledby="experience-cta">
-        <SectionHeading
-          eyebrow={locale === "id" ? "Enquiry" : "Enquiry"}
-          title={
-            <span id="experience-cta" className="inline-block">
-              {locale === "id"
-                ? "Mulai dari Satu Percakapan Tenang"
-                : "Begin with a Quiet Conversation"}
-            </span>
-          }
-        />
-        <BookingBar
-          primaryAction="plan-event"
-          secondaryAction="request-proposal"
-          context={{
-            experienceType: params.type,
-            audience: params.type === "weddings" ? "wedding" : "mice",
-          }}
-          label={
-            locale === "id"
-              ? "Perencanaan Pertemuan & Pernikahan"
-              : "Meetings & Wedding Planning"
-          }
-        />
-      </PageSection>
-    </Container>
+        </PageSection>
+      </Container>
+    </TemplatePageLayout>
   );
 }
-

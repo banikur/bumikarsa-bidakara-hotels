@@ -1,4 +1,4 @@
-export type TemplateId = 'warm-earthy' | 'cinematic' | 'membership' | 'mice';
+export type TemplateId = 'warm-earthy' | 'cinematic' | 'membership' | 'mice' | 'corporate';
 
 export interface HeroContent {
   headline: string;
@@ -53,6 +53,11 @@ export interface ContactContent {
   footer_tagline: string;
 }
 
+export interface SubpageHeader {
+  title: string;
+  description: string;
+}
+
 export interface UniversalContent {
   hero: HeroContent;
   properties: PropertyItem[];
@@ -60,10 +65,18 @@ export interface UniversalContent {
   offers: OfferItem[];
   membership: MembershipContent;
   contact: ContactContent;
+  pages?: {
+    ourHotels: SubpageHeader;
+    experiences: SubpageHeader;
+    offers: SubpageHeader;
+    membership: SubpageHeader;
+    contact: SubpageHeader;
+    stories: SubpageHeader;
+  };
 }
 
 export interface SiteConfig {
-  id: number;
+  id: string;
   active_template: TemplateId;
   content_id: UniversalContent;   // Bahasa Indonesia
   content_en: UniversalContent;   // English

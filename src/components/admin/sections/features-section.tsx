@@ -3,6 +3,7 @@
 import { FeatureItem, UniversalContent } from "@/types/cms.types";
 import { ListEditor } from "@/components/ui/list-editor";
 import { ImageUrlInput } from "@/components/ui/image-url-input";
+import { SectionTitle } from "@/components/ui/field-group";
 
 interface SectionFormProps {
   content: UniversalContent;
@@ -36,11 +37,11 @@ export function FeaturesSection({ content, onChange }: SectionFormProps) {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl">
-      <div className="mb-4">
-        <h2 className="text-lg font-bold">Experiences / Venues (Features)</h2>
-        <p className="text-sm text-muted-foreground">Depending on the active template, these items render as Spa/Dining experiences or MICE venue specifications.</p>
-      </div>
+    <div>
+      <SectionTitle
+        title="Experiences & Venues"
+        description="Depending on the active template, these render as Spa/Dining experiences or as MICE venue specifications."
+      />
 
       <ListEditor
         items={content.features}
@@ -50,35 +51,41 @@ export function FeaturesSection({ content, onChange }: SectionFormProps) {
         renderItem={(item, { onUpdate }) => (
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2 flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Feature Title / Venue Name</label>
+              <div className="col-span-2 flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Feature Title / Venue Name
+                </label>
                 <input
                   type="text"
                   value={item.title}
                   onChange={(e) => onUpdate(item.id, { title: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. Birawa Assembly Hall"
                 />
               </div>
-              <div className="col-span-1 flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Capacity (Pax)</label>
+              <div className="col-span-1 flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Capacity (Pax)
+                </label>
                 <input
                   type="number"
                   value={item.capacity || ""}
                   onChange={(e) => onUpdate(item.id, { capacity: e.target.value ? parseInt(e.target.value, 10) : undefined })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. 3000"
                 />
               </div>
             </div>
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Description</label>
+
+            <div className="flex flex-col gap-1.5">
+              <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                Description
+              </label>
               <textarea
                 value={item.description}
                 onChange={(e) => onUpdate(item.id, { description: e.target.value })}
                 rows={2}
-                className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary resize-y"
+                className="cms-input cms-textarea"
                 placeholder="Column-free Grand Ballroom..."
               />
             </div>

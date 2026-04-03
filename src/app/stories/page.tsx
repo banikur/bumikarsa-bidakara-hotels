@@ -1,67 +1,51 @@
-"use client";
-
 import { Container } from "@/components/layout/container";
 import { PageSection } from "@/components/layout/page-section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { StoryCard } from "@/components/home/story-card";
 import { AnimatedReveal } from "@/components/motion/animated-reveal";
-import { useLocale } from "@/contexts/locale-context";
-import { getStories } from "@/content/selectors";
-import { homeCopy } from "@/content/home";
+import { TemplatePageLayout } from "@/components/templates";
+import { getActiveTemplateId } from "@/lib/get-active-template";
+import { getSiteConfig } from "@/lib/get-site-config";
 
-export default function StoriesPage() {
-  const { locale } = useLocale();
-  const stories = getStories(locale);
-  const copy = homeCopy[locale];
+export default async function StoriesPage() {
+  const [templateId, config] = await Promise.all([
+    getActiveTemplateId(),
+    getSiteConfig(),
+  ]);
+
+  const pages = config.content_id.pages;
 
   return (
-    <Container
-      as="main"
-      className="flex flex-col gap-20 pb-24 pt-28 lg:gap-24 lg:pt-32"
-    >
-      <PageSection aria-labelledby="stories-hero">
-        <SectionHeading
-          eyebrow={locale === "id" ? "Stories" : "Stories"}
-          title={
-            <span id="stories-hero" className="inline-block">
-              {copy.stories.heading}
-            </span>
-          }
-          description={copy.stories.description}
-        />
-        <AnimatedReveal delay={0.15}>
-          <p className="max-w-2xl text-xs text-zinc-400 md:text-sm md:leading-relaxed">
-            {locale === "id"
-              ? "Jurnal singkat yang menyorot manusia, kota, dan momen hening di antara perjalanan — untuk memberi konteks pada setiap kunjungan Anda."
-              : "Short journals capturing people, cities, and the quiet in-between moments — lending context and meaning to each of your stays."}
-          </p>
-        </AnimatedReveal>
-      </PageSection>
+    <TemplatePageLayout templateId={templateId}>
+      <Container
+        as="main"
+        className="flex flex-col gap-20 pb-24 pt-28 lg:gap-24 lg:pt-32"
+      >
+        <PageSection aria-labelledby="stories-hero">
+          <SectionHeading
+            eyebrow="Stories"
+            title={pages?.stories?.title || "Notes from Across the Archipelago"}
+            description={pages?.stories?.description || "Short journals on cities, people, and quiet moments."}
+          />
+          <AnimatedReveal delay={0.15}>
+            <p className="max-w-2xl text-xs md:text-sm md:leading-relaxed opacity-60">
+              Stories from the heart of the archipelago—about people, places, and the quiet moments that make hospitality meaningful.
+            </p>
+          </AnimatedReveal>
+        </PageSection>
 
-      <PageSection aria-labelledby="stories-grid">
-        <SectionHeading
-          eyebrow={locale === "id" ? "Journal" : "Journal"}
-          title={
-            <span id="stories-grid" className="inline-block">
-              {locale === "id"
-                ? "Catatan dari Jantung Nusantara"
-                : "Notes from Across the Archipelago"}
-            </span>
-          }
-        />
-        <div className="grid gap-4 md:grid-cols-3">
-          {stories.map((story) => (
-            <StoryCard
-              key={story.slug}
-              title={story.title}
-              category={story.category}
-              summary={story.summary}
-              href={`/stories/${story.slug}`}
-            />
-          ))}
-        </div>
-      </PageSection>
-    </Container>
+        <PageSection aria-labelledby="stories-grid">
+          <SectionHeading
+            eyebrow="Journal"
+            title="Latest Stories"
+          />
+          <div className="grid gap-4 md:grid-cols-3">
+            <p className="col-span-full text-sm opacity-60">
+              Stories coming soon. Check back for updates from Bumikarsa Bidakara.
+            </p>
+          </div>
+        </PageSection>
+      </Container>
+    </TemplatePageLayout>
   );
 }
-

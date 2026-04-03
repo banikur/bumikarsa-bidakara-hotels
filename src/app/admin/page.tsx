@@ -24,6 +24,7 @@ export default async function AdminPage() {
                 cs.set("admin_session", "true", {
                   httpOnly: true,
                   secure: process.env.NODE_ENV === "production",
+                  sameSite: "lax",
                   maxAge: 60 * 60 * 24, // 1 day
                   path: "/",
                 });

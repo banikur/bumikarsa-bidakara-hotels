@@ -1,12 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { UniversalContent } from "@/types/cms.types";
 
 export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", backgroundColor: "#0a0a0f", color: "#F5F0E8", overflowX: "hidden" }}>
       <style>{`
@@ -14,7 +10,6 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
         .cin-serif { font-family: 'Playfair Display', Georgia, serif; }
         .cin-gold-text { background: linear-gradient(135deg,#D4AF77 0%,#E8C547 50%,#D4AF77 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .cin-glass { background:rgba(26,28,35,0.4); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.05); }
-        .cin-glass-nav { background:rgba(10,10,15,0.4); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid rgba(212,175,119,0.1); }
         .cin-btn { background:rgba(212,175,119,0.1); border:1px solid rgba(212,175,119,0.4); color:#E8C547; position:relative; overflow:hidden; transition:all 0.4s cubic-bezier(0.165,0.84,0.44,1); border-radius:9999px; backdrop-filter:blur(4px); cursor:pointer; }
         .cin-btn::after { content:''; position:absolute; background:linear-gradient(135deg,#D4AF77 0%,#E8C547 100%); top:0;left:0;right:0;bottom:0; opacity:0; z-index:-1; transition:opacity 0.4s; }
         .cin-btn:hover { color:#0a0a0f; transform:scale(1.05); box-shadow:0 0 20px rgba(232,197,71,0.4); border-color:transparent; }
@@ -38,31 +33,6 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
 
       <div className="cin-noise" />
       <div className="cin-loading" />
-
-      {/* NAVBAR */}
-      <nav style={{ position: "fixed", top: 0, width: "100%", zIndex: 50 }} className="cin-glass-nav">
-        <div style={{ maxWidth: 1400, margin: "0 auto", padding: "20px 48px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 48 }}>
-            <a href="#destinations" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(245,240,232,0.7)", textDecoration: "none", transition: "color 0.4s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF77")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,240,232,0.7)")}>
-              Destinations
-            </a>
-            <a href="#experiences" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(245,240,232,0.7)", textDecoration: "none", transition: "color 0.4s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#D4AF77")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(245,240,232,0.7)")}>
-              Experiences
-            </a>
-          </div>
-
-          <a href="#" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", textDecoration: "none" }}>
-            <span className="cin-serif cin-gold-text" style={{ fontSize: 28, fontWeight: 500, letterSpacing: "0.05em" }}>BUMIKARSA</span>
-            <span style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.3em", color: "rgba(212,175,119,0.8)", marginTop: 4 }}>Hotels &amp; Resorts</span>
-          </a>
-
-          <a href="#reserve" className="cin-btn" style={{ padding: "10px 32px", fontSize: 12, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.15em", textDecoration: "none", zIndex: 10, display: "inline-block" }}>
-            Reserve
-          </a>
-        </div>
-      </nav>
 
       {/* HERO */}
       <header style={{ position: "relative", height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
@@ -121,7 +91,7 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
         </div>
 
         <div style={{ display: "flex", overflowX: "auto", scrollSnapType: "x mandatory", scrollbarWidth: "none", paddingLeft: 48, paddingBottom: 32, gap: 32 }}>
-          {copy.properties.map((hotel, i) => (
+          {copy.properties && copy.properties.length > 0 ? copy.properties.map((hotel, i) => (
             <div key={hotel.id} className="cin-reveal" style={{ flex: "0 0 calc(40vw - 2rem)", scrollSnapAlign: "center", cursor: "pointer" }}>
               <div style={{ position: "relative", height: "60vh", width: "100%", overflow: "hidden" }}>
                 <img src={hotel.image_url || "https://images.unsplash.com/photo-1499591934245-40b55745b905?q=80&w=2000&auto=format&fit=crop"} alt={hotel.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -133,7 +103,9 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
                 </div>
               </div>
             </div>
-          ))}
+          )) : (
+            <p style={{ color: "rgba(245,240,232,0.5)", fontSize: 14 }}>Properties coming soon.</p>
+          )}
           <div style={{ flex: "0 0 32px" }} />
         </div>
       </section>
@@ -148,6 +120,7 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
             <div style={{ width: 1, height: 64, background: "#D4AF77", margin: "0 auto", opacity: 0.5 }} />
           </div>
 
+          {copy.features && copy.features.length > 0 ? (
           <div style={{ display: "grid", gridTemplateColumns: "7fr 5fr", gap: 32, minHeight: 800 }}>
             {/* Large item */}
             <div style={{ position: "relative", overflow: "hidden", cursor: "pointer" }}
@@ -188,6 +161,9 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
               ))}
             </div>
           </div>
+          ) : (
+            <p style={{ textAlign: "center", color: "rgba(245,240,232,0.5)", fontSize: 14 }}>Experiences coming soon.</p>
+          )}
         </div>
       </section>
 

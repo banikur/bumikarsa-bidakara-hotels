@@ -12,7 +12,7 @@ const VENUES = [
 
 export function TemplateMice({ copy }: { copy: UniversalContent }) {
   // If CMS has venues defined in features, use them instead of hardcoded
-  const activeVenues = copy.features && copy.features.length > 0 
+  const activeVenues = copy.features && copy.features.length > 0
     ? copy.features.map(f => ({
         name: f.title,
         desc: f.description,
@@ -43,31 +43,6 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
         .mice-card img { transition:filter 0.5s,transform 0.5s; filter:grayscale(100%); }
         .mice-card:hover img { filter:grayscale(0%); }
       `}</style>
-
-      {/* NAVBAR */}
-      <nav style={{ position: "sticky", top: 0, zIndex: 50, background: "white", borderBottom: "1px solid #e5e7eb" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", height: 80 }}>
-            <Link href="/" style={{ display: "flex", flexDirection: "column", textDecoration: "none" }}>
-              <span className="mice-heading" style={{ fontWeight: 700, color: "#0A192F", fontSize: 20, lineHeight: 1 }}>BUMIKARSA</span>
-              <span style={{ color: "#C9A96E", fontSize: 10, fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", marginTop: 4 }}>Hotels Management</span>
-            </Link>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
-              {[{ href: "#venues", label: "Venues" }, { href: "#properties", label: "Properties" }, { href: "#why-us", label: "Why Us" }].map(l => (
-                <a key={l.href} href={l.href} style={{ fontSize: 14, fontWeight: 500, color: "#4B5563", textDecoration: "none", transition: "color 0.3s" }}
-                  onMouseEnter={e => e.currentTarget.style.color = "#0A192F"} onMouseLeave={e => e.currentTarget.style.color = "#4B5563"}>
-                  {l.label}
-                </a>
-              ))}
-              <div style={{ height: 16, width: 1, background: "#d1d5db" }} />
-              <a href="#contact" className="mice-btn" style={{ padding: "10px 24px", fontSize: 14, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                Book Meeting
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "85vh", display: "flex", alignItems: "center" }}>

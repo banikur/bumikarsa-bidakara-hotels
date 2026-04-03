@@ -1,58 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 import { UniversalContent } from "@/types/cms.types";
 
 export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
-  const navRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (navRef.current) {
-        navRef.current.classList.toggle("scrolled", window.scrollY > 40);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#FDFAF5", color: "#2C1A0E" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
         :root{--parchment:#F7F1E6;--parchment-dark:#EDE4D3;--sand:#D4B896;--gold:#B8924A;--gold-light:#C9A96E;--espresso:#2C1A0E;--bark:#4A3728;--ink:#1C1007;--mist:#8B7B6B;--cream:#FDFAF5;}
-        .we-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,padding 0.4s;}
-        .we-nav.scrolled{background:rgba(247,241,230,0.96);backdrop-filter:blur(12px);padding:16px 40px;border-bottom:1px solid rgba(184,146,74,0.15);}
-        .we-logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--cream);letter-spacing:0.04em;text-decoration:none;transition:color 0.4s;line-height:1.2;}
-        .we-nav.scrolled .we-logo{color:var(--espresso);}
-        .we-logo span{display:block;font-size:9px;font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-light);margin-top:2px;}
-        .we-nav-links{display:flex;gap:36px;list-style:none;margin:0;padding:0;}
-        .we-nav-links a{font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;color:rgba(253,250,245,0.75);text-decoration:none;transition:color 0.3s;}
-        .we-nav.scrolled .we-nav-links a{color:var(--bark);}
-        .we-nav-links a:hover,button.we-cta:hover{color:var(--gold)!important;}
-        .we-cta{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--espresso);background:var(--gold);padding:10px 24px;text-decoration:none;border:none;cursor:pointer;transition:background 0.3s,color 0.3s;}
-        .we-cta:hover{background:var(--espresso);color:var(--gold);}
         .ornament{display:inline-block;width:36px;height:1px;background:var(--gold);vertical-align:middle;margin:0 14px;}
         .eyebrow{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);}
         @keyframes scrollLine{0%{left:-40px}100%{left:40px}}
         .scroll-line{width:40px;height:1px;background:rgba(184,146,74,0.5);position:relative;overflow:hidden;}
         .scroll-line::after{content:'';position:absolute;top:0;left:-40px;width:40px;height:1px;background:var(--gold);animation:scrollLine 2s ease-in-out infinite;}
       `}</style>
-
-      {/* NAV */}
-      <nav ref={navRef} className="we-nav">
-        <a href="#" className="we-logo">
-          Bumikarsa Bidakara
-          <span>Hotels Management</span>
-        </a>
-        <ul className="we-nav-links" style={{ display: "flex" }}>
-          <li><a href="#portfolio">Hotels</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a href="#contact" className="we-cta">Reserve</a>
-      </nav>
 
       {/* HERO */}
       <section id="hero" style={{ position: "relative", height: "100vh", minHeight: 700, display: "flex", alignItems: "flex-end", overflow: "hidden" }}>

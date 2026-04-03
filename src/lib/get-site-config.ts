@@ -13,6 +13,7 @@ function deepMerge(data: any): UniversalContent {
     offers: Array.isArray(data.offers) ? data.offers : DEFAULT_CONTENT.offers,
     membership: { ...DEFAULT_CONTENT.membership, ...data.membership },
     contact: { ...DEFAULT_CONTENT.contact, ...data.contact },
+    pages: { ...DEFAULT_CONTENT.pages, ...data.pages },
   };
 }
 
@@ -20,14 +21,13 @@ export async function getSiteConfig(): Promise<SiteConfig> {
   const { data, error } = await insforge.database
     .from("site_config")
     .select("*")
-    .eq("id", 1)
+    .limit(1)
     .single();
 
   if (error || !data) {
     // If table is totally empty, return a safe fallback object locally
-    // (though our schema says we insert a seed row)
     return {
-      id: 1,
+      id: "fallback-uuid",
       active_template: "warm-earthy",
       content_id: DEFAULT_CONTENT,
       content_en: DEFAULT_CONTENT,

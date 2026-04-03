@@ -3,7 +3,7 @@
 import { PropertyItem, UniversalContent } from "@/types/cms.types";
 import { ListEditor } from "@/components/ui/list-editor";
 import { ImageUrlInput } from "@/components/ui/image-url-input";
-import { ChangeEvent } from "react";
+import { SectionTitle } from "@/components/ui/field-group";
 
 interface SectionFormProps {
   content: UniversalContent;
@@ -37,11 +37,11 @@ export function PropertiesSection({ content, onChange }: SectionFormProps) {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl">
-      <div className="mb-4">
-        <h2 className="text-lg font-bold">Featured Properties</h2>
-        <p className="text-sm text-muted-foreground">Add or edit hotels and managed properties that will appear on the landing page slider or grid.</p>
-      </div>
+    <div>
+      <SectionTitle
+        title="Featured Properties"
+        description="Add the hotels and venues that will appear in the properties carousel or grid section."
+      />
 
       <ListEditor
         items={content.properties}
@@ -51,35 +51,41 @@ export function PropertiesSection({ content, onChange }: SectionFormProps) {
         renderItem={(item, { onUpdate }) => (
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Property Name</label>
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Property Name
+                </label>
                 <input
                   type="text"
                   value={item.name}
                   onChange={(e) => onUpdate(item.id, { name: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. Hotel Bidakara Jakarta"
                 />
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Location / Tag</label>
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Location / Tag
+                </label>
                 <input
                   type="text"
                   value={item.location}
                   onChange={(e) => onUpdate(item.id, { location: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. Pancoran, Jakarta Selatan"
                 />
               </div>
             </div>
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Abstract / Short Description</label>
+
+            <div className="flex flex-col gap-1.5">
+              <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                Abstract / Short Description
+              </label>
               <textarea
                 value={item.abstract}
                 onChange={(e) => onUpdate(item.id, { abstract: e.target.value })}
                 rows={2}
-                className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary resize-y"
+                className="cms-input cms-textarea"
                 placeholder="Briefly describe the property's best selling points..."
               />
             </div>

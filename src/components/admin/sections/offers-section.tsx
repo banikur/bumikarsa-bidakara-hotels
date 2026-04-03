@@ -3,6 +3,7 @@
 import { OfferItem, UniversalContent } from "@/types/cms.types";
 import { ListEditor } from "@/components/ui/list-editor";
 import { ImageUrlInput } from "@/components/ui/image-url-input";
+import { SectionTitle } from "@/components/ui/field-group";
 
 interface SectionFormProps {
   content: UniversalContent;
@@ -36,11 +37,11 @@ export function OffersSection({ content, onChange }: SectionFormProps) {
   };
 
   return (
-    <div className="flex flex-col gap-6 max-w-3xl">
-      <div className="mb-4">
-        <h2 className="text-lg font-bold">Special Offers</h2>
-        <p className="text-sm text-muted-foreground">Manage exclusive promotions, staycation deals, and early bird discounts.</p>
-      </div>
+    <div>
+      <SectionTitle
+        title="Special Offers"
+        description="Manage exclusive promotions, staycation deals, and early bird discounts shown in the Offers section."
+      />
 
       <ListEditor
         items={content.offers}
@@ -50,35 +51,41 @@ export function OffersSection({ content, onChange }: SectionFormProps) {
         renderItem={(item, { onUpdate }) => (
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2 flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Offer Title</label>
+              <div className="col-span-2 flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Offer Title
+                </label>
                 <input
                   type="text"
                   value={item.title}
                   onChange={(e) => onUpdate(item.id, { title: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. Weekend Gateway"
                 />
               </div>
-              <div className="col-span-1 flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Badge (Optional)</label>
+              <div className="col-span-1 flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Badge (Optional)
+                </label>
                 <input
                   type="text"
                   value={item.badge || ""}
                   onChange={(e) => onUpdate(item.id, { badge: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. 20% OFF"
                 />
               </div>
             </div>
-            
-            <div className="flex flex-col gap-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Subtitle / Short Detail</label>
+
+            <div className="flex flex-col gap-1.5">
+              <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                Subtitle / Short Detail
+              </label>
               <textarea
                 value={item.subtitle}
                 onChange={(e) => onUpdate(item.id, { subtitle: e.target.value })}
                 rows={2}
-                className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary resize-y"
+                className="cms-input cms-textarea"
                 placeholder="Includes breakfast for two and late checkout..."
               />
             </div>

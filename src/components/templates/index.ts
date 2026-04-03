@@ -12,9 +12,7 @@ import { TemplateCinematic } from "./template-cinematic";
 import { TemplateMembership } from "./template-membership";
 import { TemplateMice } from "./template-mice";
 import type { ComponentType } from "react";
-import { UniversalContent } from "@/types/cms.types";
-
-export type TemplateId = "warm-earthy" | "cinematic" | "membership" | "mice" | "corporate";
+import { UniversalContent, TemplateId } from "@/types/cms.types";
 
 export const TEMPLATE_MAP: Record<TemplateId, ComponentType<{ copy: UniversalContent }>> = {
   "warm-earthy": TemplateWarmEarthy,
@@ -24,3 +22,7 @@ export const TEMPLATE_MAP: Record<TemplateId, ComponentType<{ copy: UniversalCon
   // Corporate falls back to warm-earthy until its own template is built
   corporate: TemplateWarmEarthy,
 };
+
+// Export the page layout wrapper for isolated page mode
+export { TemplatePageLayout } from "./template-page-layout";
+export type { TemplateId } from "@/types/cms.types";

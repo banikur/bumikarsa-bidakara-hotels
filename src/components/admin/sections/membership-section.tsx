@@ -3,6 +3,7 @@
 import { MembershipTier, UniversalContent } from "@/types/cms.types";
 import { ListEditor } from "@/components/ui/list-editor";
 import { ChangeEvent } from "react";
+import { FieldGroup, SectionTitle } from "@/components/ui/field-group";
 
 interface SectionFormProps {
   content: UniversalContent;
@@ -53,43 +54,45 @@ export function MembershipSection({ content, onChange }: SectionFormProps) {
   };
 
   return (
-    <div className="flex flex-col gap-8 max-w-3xl">
-      <div className="flex flex-col gap-6">
-        <div className="mb-2">
-          <h2 className="text-lg font-bold">Membership Intro</h2>
-          <p className="text-sm text-muted-foreground">General details for the membership club teaser.</p>
-        </div>
+    <div className="flex flex-col gap-10">
+      {/* Intro block */}
+      <div>
+        <SectionTitle
+          title="Membership Club"
+          description="Set the headline and description for the loyalty membership teaser section."
+        />
 
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-foreground uppercase tracking-wider">Headline</label>
-          <input
-            type="text"
-            name="headline"
-            value={content.membership.headline}
-            onChange={handleChange}
-            className="w-full px-4 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
-            placeholder="e.g. Join the Elite Club"
-          />
-        </div>
+        <div className="flex flex-col gap-6">
+          <FieldGroup label="Headline" hint="The main hook for the membership program.">
+            <input
+              type="text"
+              name="headline"
+              value={content.membership.headline}
+              onChange={handleChange}
+              className="cms-input cms-input-lg"
+              placeholder="e.g. Join the Elite Club"
+            />
+          </FieldGroup>
 
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-semibold text-foreground uppercase tracking-wider">Description</label>
-          <textarea
-            name="description"
-            value={content.membership.description}
-            onChange={handleChange}
-            rows={3}
-            className="w-full px-4 py-2 bg-background border rounded text-sm outline-none focus:border-primary resize-y"
-            placeholder="Experience bespoke luxury..."
-          />
+          <FieldGroup label="Description" hint="A 2–3 sentence intro to the membership benefits.">
+            <textarea
+              name="description"
+              value={content.membership.description}
+              onChange={handleChange}
+              rows={3}
+              className="cms-input cms-textarea"
+              placeholder="Experience bespoke services, exclusive rewards, and privileges reserved for our members..."
+            />
+          </FieldGroup>
         </div>
       </div>
 
-      <div className="border-t pt-8">
-        <div className="mb-4">
-          <h2 className="text-lg font-bold">Membership Tiers</h2>
-          <p className="text-sm text-muted-foreground">Manage tier names and their exclusive benefits.</p>
-        </div>
+      {/* Tiers block */}
+      <div style={{ borderTop: "1px solid #E5E1DB", paddingTop: 32 }}>
+        <SectionTitle
+          title="Membership Tiers"
+          description="Manage tier names and their exclusive benefits. Each benefit is one line."
+        />
 
         <ListEditor
           items={content.membership.tiers || []}
@@ -98,27 +101,31 @@ export function MembershipSection({ content, onChange }: SectionFormProps) {
           onUpdate={handleUpdateTier}
           renderItem={(item, { onUpdate }) => (
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Tier Name</label>
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Tier Name
+                </label>
                 <input
                   type="text"
                   value={item.name}
                   onChange={(e) => onUpdate(item.id, { name: e.target.value })}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary"
+                  className="cms-input"
                   placeholder="e.g. Platinum"
                 />
               </div>
-              
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Benefits (One per line)</label>
+
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#5A5652" }}>
+                  Benefits (one per line)
+                </label>
                 <textarea
                   value={item.benefits.join("\n")}
                   onChange={(e) => onUpdate(item.id, { benefits: e.target.value.split("\n").filter(Boolean) })}
                   rows={4}
-                  className="w-full px-3 py-2 bg-background border rounded text-sm outline-none focus:border-primary resize-y leading-relaxed"
-                  placeholder="Dedicated Butler&#10;Free Airport Transfer&#10;Late Checkout 4 PM"
+                  className="cms-input cms-textarea"
+                  placeholder={"Dedicated Butler\nFree Airport Transfer\nLate Checkout 4 PM"}
                 />
-                <p className="text-[10px] text-muted-foreground">Press Enter for a new line to add another benefit.</p>
+                <span style={{ fontSize: 11, color: "#b0a898" }}>Press Enter for a new line to add another benefit.</span>
               </div>
             </div>
           )}

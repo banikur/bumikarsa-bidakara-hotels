@@ -45,8 +45,6 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
         .mice-card:hover img { filter:grayscale(0%); }
       `}</style>
 
-<<<<<<< HEAD
-=======
       {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
       <SectionAnchor id="about" />
       <SectionAnchor id="properties" />
@@ -57,7 +55,6 @@ export function TemplateMice({ copy }: { copy: UniversalContent }) {
       <SectionAnchor id="membership" />
       <SectionAnchor id="whistleblowing" />
 
->>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "85vh", display: "flex", alignItems: "center" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>

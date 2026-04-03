@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { UniversalContent } from "@/types/cms.types";
 import { SectionAnchor } from "@/components/layout/section-anchor";
 
@@ -74,8 +75,6 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
         .mem-badge { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:2px 10px; border-radius:9999px; }
       `}</style>
 
-<<<<<<< HEAD
-=======
       {/* TOP BAR */}
       <SectionAnchor id="about" />
       <SectionAnchor id="services" />
@@ -92,7 +91,6 @@ export function TemplateMembership({ copy }: { copy: UniversalContent }) {
 
       {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
 
->>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <section style={{ background: "linear-gradient(135deg, #0A192F 60%, #1a3358)", position: "relative", overflow: "hidden", padding: "80px 16px 112px" }}>
         {copy.hero.background_image_url && (

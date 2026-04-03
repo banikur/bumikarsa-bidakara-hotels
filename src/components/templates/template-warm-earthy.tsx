@@ -17,11 +17,8 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
         .scroll-line::after{content:'';position:absolute;top:0;left:-40px;width:40px;height:1px;background:var(--gold);animation:scrollLine 2s ease-in-out infinite;}
       `}</style>
 
-<<<<<<< HEAD
-=======
       {/* NAV handled globally in app/layout with Navbar (keep header consistent across templates) */}
 
->>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <Section id="about" style={{ position: "relative", height: "100vh", minHeight: 700, display: "flex", alignItems: "flex-end", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url('${copy.hero.background_image_url || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1800&q=80"}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
@@ -122,7 +119,7 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* OFFERS */}
       <section id="offers" style={{ padding: "120px 0", background: "var(--cream)" }}>
@@ -228,7 +225,7 @@ export function TemplateWarmEarthy({ copy }: { copy: UniversalContent }) {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* FOOTER */}
       <footer style={{ background: "#1C1007", padding: "60px 40px 32px", maxWidth: "100%" }}>

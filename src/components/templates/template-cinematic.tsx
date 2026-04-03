@@ -35,11 +35,8 @@ export function TemplateCinematic({ copy }: { copy: UniversalContent }) {
       <div className="cin-noise" />
       <div className="cin-loading" />
 
-<<<<<<< HEAD
-=======
       {/* NAVBAR handled globally in app/layout with Navbar (consistent header across templates) */}
 
->>>>>>> 1ebe353c3d1ab9ffde9ef71134a30e7f0e75f449
       {/* HERO */}
       <header id="about" style={{ position: "relative", height: "100vh", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
